@@ -19,7 +19,13 @@ from urllib.request import urlopen
 BASE_URL = "https://www.domain.com.au"
 N_PAGES = range(1, 51) # update this to your liking
 
-headers = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
+
+def get(url):
+    response = requests.get(url, headers=HEADERS)
+    while response.status_code == 502:
+        response = requests.get(url, headers=HEADERS)
+    return response
 
 # begin code
 url_links = []
@@ -29,7 +35,8 @@ data = []
 for page in N_PAGES:
     print("%s.." % page, end='')
     url = BASE_URL + f"/rent/melbourne-region-vic/?sort=price-desc&page={page}"
-    bs_object = BeautifulSoup(requests.get(url, headers=headers).text, "html.parser")
+    
+    bs_object = BeautifulSoup(get(url).text, "html.parser")
 
     # find the unordered list (ul) elements which are the results, then
     # find all href (a) tags that are from the base_url website.
@@ -53,8 +60,8 @@ for page in N_PAGES:
 for property_url in url_links[1:]:
     property_metadata = dict()
     
-    bs_object = BeautifulSoup(requests.get(property_url, headers=headers).text, "html.parser")
-
+    bs_object = BeautifulSoup(get(property_url).text, "html.parser")
+    
     property_metadata['url'] = property_url
     
     # looks for the header class to get property name
