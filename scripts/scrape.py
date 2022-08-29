@@ -28,7 +28,7 @@ url_links = []
 property_metadata = defaultdict(dict)
 
 # generate list of urls to visit
-for page in N_PAGES:
+for page in N_PAGES:    
     url = BASE_URL + f"/rent/melbourne-region-vic/?sort=price-desc&page={page}"
     bs_object = BeautifulSoup(requests.get(url, headers=headers).text, "html.parser")
 
@@ -52,7 +52,7 @@ for page in N_PAGES:
 
 # for each url, scrape some basic metadata
 for property_url in url_links[1:]:
-    bs_object = BeautifulSoup(requests.get(url, headers=headers).text, "html.parser")
+    bs_object = BeautifulSoup(requests.get(property_url, headers=headers).text, "html.parser")
 
     # looks for the header class to get property name
     property_metadata[property_url]['name'] = bs_object \
@@ -78,11 +78,15 @@ for property_url in url_links[1:]:
         )[0].split(',')
     ]
 
-    property_metadata[property_url]['rooms'] = [
-        re.findall(r'\d\s[A-Za-z]+', feature.text)[0] for feature in bs_object \
-            .find("div", {"data-testid": "property-features"}) \
-            .findAll("span", {"data-testid": "property-features-text-container"})
-    ]
+    try:
+        property_metadata[property_url]['rooms'] = [
+            re.findall(r'\d\s[A-Za-z]+', feature.text)[0] for feature in bs_object \
+                .find("div", {"data-testid": "property-features"}) \
+                .findAll("span", {"data-testid": "property-features-text-container"})
+        ]
+    except IndexError:
+        # Not all property listings have a property-features div
+        pass
 
     property_metadata[property_url]['desc'] = re \
         .sub(r'<br\/>', '\n', str(bs_object.find("p"))) \
