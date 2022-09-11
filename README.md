@@ -27,5 +27,5 @@ Setup instructions for the Domain Property API can be found below.
 
 4. Confirm that the following output files have been generated within the same folder. 
 
-- > 
+- > property.json 
 
