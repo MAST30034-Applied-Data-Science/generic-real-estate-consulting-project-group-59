@@ -1,5 +1,6 @@
 
-import json
+import json 
+import os 
 from urllib import response 
 import requests 
 
@@ -8,30 +9,18 @@ class DomainPropertyReader:
     def __init__(self, domainAPIKey): 
         
         self.domainAPIKey = domainAPIKey 
-    
+
     def getProperty(self, propertyID): 
 
         """Returns the given property """ 
 
-        url = f"https://api.domain.com.au/v1/properties/{propertyID}" 
-        headers = {"X-Api-Key" : self.domainAPIKey} 
-        print(f"url = {url} \n") 
+        getPropertyCommand = f"""
+        curl -X GET "https://api.domain.com.au/v1/properties/{propertyID}" -H "accept: application/json" -H "X-Api-Key: {self.domainAPIKey}" 
+        """ 
 
-        response = requests.get(url, headers) 
-        
-        return response 
+        property = json.loads(os.popen(getPropertyCommand).read()) 
 
-    def getAuthentication(self): 
-
-        """Returns the authentication status of the given API key """ 
-
-        url = f"https://api.domain.com.au/v1/me" 
-        headers = {"X-Api-Key" : self.domainAPIKey} 
-        print(f"url = {url} \n") 
-
-        response = requests.get(url, headers) 
-        
-        return response 
+        return property 
 
 def main(): 
 
@@ -43,13 +32,15 @@ def main():
     print(f"domainAPIKey = {domainAPIKey} \n") 
     aPropertyReader = DomainPropertyReader(domainAPIKey) 
 
-    print(f"Getting the authentication status of the given API key \n") 
-    authenticationStatus = aPropertyReader.getAuthentication()  
-    print(authenticationStatus.content) 
-
     print(f"Requesting a property \n") 
     aProperty = aPropertyReader.getProperty(propertyID = "RF-8884-AK") 
-    print(aProperty.content) 
+    print(aProperty["address"]) 
+
+    outputFileName = "property.json" 
+    print(f"Writing the requested property to the following location \n") 
+    print(f"{outputFileName} \n") 
+    outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
+    json.dump(aProperty, fp = outputFile, ensure_ascii = False, indent = 4) 
 
 if __name__ == "__main__": 
 
