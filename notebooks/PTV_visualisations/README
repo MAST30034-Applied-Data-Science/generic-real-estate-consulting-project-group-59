@@ -1,0 +1,8 @@
+
+
+
+
+
+Reason for separating different types of transporatation
+    Because there are over 30,000 stations in VIC, 
+    kernel will dead if plot them at the same time
