@@ -1,0 +1,302 @@
+[
+    {
+        "address": "1 Crampton Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Crampton",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "SS-6237-MM",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Denver Crescent, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Denver",
+            "streetType": "Cr",
+            "streetTypeLong": "Crescent",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "DJ-0336-KC",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Edsall Close, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Edsall",
+            "streetType": "Cl",
+            "streetTypeLong": "Close",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "WZ-2542-EP",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Fulham Road, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Fulham",
+            "streetType": "Rd",
+            "streetTypeLong": "Road",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "DG-6308-KE",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Gleneagles Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Gleneagles",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "OX-2903-ML",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Greenside Drive, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Greenside",
+            "streetType": "Dr",
+            "streetTypeLong": "Drive",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "VX-7572-ZE",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Grosvenor Road, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Grosvenor",
+            "streetType": "Rd",
+            "streetTypeLong": "Road",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "XV-4933-RG",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Kerr Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Kerr",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "ZB-3206-MP",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Longwood Close, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Longwood",
+            "streetType": "Cl",
+            "streetTypeLong": "Close",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "PW-8771-FQ",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Lucy Hill Rise, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Lucy Hill",
+            "streetType": "Ri",
+            "streetTypeLong": "Rise",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "CF-7184-CH",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Melaleuca Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Melaleuca",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "FZ-5072-EX",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Nioka Place, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Nioka",
+            "streetType": "Pl",
+            "streetTypeLong": "Place",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "EY-8887-BI",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Orchard Way North, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Orchard",
+            "streetType": "Wy N",
+            "streetTypeLong": "Way North",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "GO-7724-CP",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Police Road, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Police",
+            "streetType": "Rd",
+            "streetTypeLong": "Road",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "RK-0558-SR",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Roger Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Roger",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "TW-2765-KR",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Tamboon Drive, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Tamboon",
+            "streetType": "Dr",
+            "streetTypeLong": "Drive",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "CQ-8622-OR",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Third Avenue, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Third",
+            "streetType": "Av",
+            "streetTypeLong": "Avenue",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "MY-5069-JE",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Westminster Drive, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Westminster",
+            "streetType": "Dr",
+            "streetTypeLong": "Drive",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "WE-9359-LP",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Whipbird Court, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Whipbird",
+            "streetType": "Ct",
+            "streetTypeLong": "Court",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "DX-9636-IT",
+        "relativeScore": 100
+    },
+    {
+        "address": "1 Wyandra Way, Rowville VIC 3178",
+        "addressComponents": {
+            "unitNumber": "",
+            "streetNumber": "1",
+            "streetName": "Wyandra",
+            "streetType": "Wy",
+            "streetTypeLong": "Way",
+            "suburb": "Rowville",
+            "postCode": "3178",
+            "state": "VIC"
+        },
+        "id": "XF-2163-YS",
+        "relativeScore": 100
+    }
+]
