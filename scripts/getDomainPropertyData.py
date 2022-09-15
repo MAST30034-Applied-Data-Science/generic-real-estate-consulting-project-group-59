@@ -41,7 +41,7 @@ class DomainPropertyReader:
         MAX_PROPERTIES = 20 
 
         getPropertiesByLocationCommand = f"""
-        curl -X GET "https://api.domain.com.au/v1/properties/_suggest?terms={locationTerms}&pageSize={MAX_PROPERTIES}&channel=All" -H "accept: application/json" -H "X-Api-Key: {self.domainAPIKey}" 
+        curl -X GET "https://api.domain.com.au/v1/properties/_suggest?terms=\"{locationTerms}\"&pageSize={MAX_PROPERTIES}&channel=All" -H "accept: application/json" -H "X-Api-Key: {self.domainAPIKey}" 
         """ 
 
         propertiesByLocation = json.loads(os.popen(getPropertiesByLocationCommand).read()) 
@@ -52,51 +52,60 @@ class DomainPropertyReader:
 def main(): 
 
     print(f"Reading the Domain API key \n") 
-    domainAPIKeyJSON = json.load(open("domainAPIKey.json")) 
+    domainAPIKeyJSONFile = open("domainAPIKey.json")
+    domainAPIKeyJSON = json.load(domainAPIKeyJSONFile) 
+    domainAPIKeyJSONFile.close() 
     domainAPIKey = domainAPIKeyJSON["key"] 
 
     print(f"Creating a Domain property reader with the following API key ") 
     print(f"domainAPIKey = {domainAPIKey} \n") 
     aPropertyReader = DomainPropertyReader(domainAPIKey) 
 
-    examplePropertyID = "RF-8884-AK" 
-    print(f"Requesting the following property \n") 
-    print(f"{examplePropertyID} \n") 
-    aProperty = aPropertyReader.getProperty(propertyID = examplePropertyID) 
-    print(aProperty["address"]) 
+    print(f"Reading the given list of suburbs \n") 
+    victoriaSuburbsFile = open("victoriaSuburbs.txt") 
+    victoriaSuburbs = [suburb[:-1] for suburb in victoriaSuburbsFile] 
+    victoriaSuburbsFile.close() 
+    print(victoriaSuburbs) 
 
-    outputFileName = "property.json" 
-    print(f"Writing the requested property to the following location \n") 
-    print(f"{outputFileName} \n") 
-    outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
-    json.dump(aProperty, fp = outputFile, ensure_ascii = False, indent = 4) 
+    locationPropertiesFolder = "../data/raw/locationProperties" 
+    
+    # Ensure the location properties folder exists 
+    if not os.path.exists(locationPropertiesFolder): 
 
-    print(f"Requesting the price estimate for the following property \n") 
-    print(f"{examplePropertyID} \n") 
-    aPropertyPriceEstimate = aPropertyReader.getPropertyPriceEstimate(
-        propertyID = examplePropertyID) 
-    print(aPropertyPriceEstimate) 
+        os.makedirs(locationPropertiesFolder) 
 
-    outputFileName = "propertyPriceEstimate.json" 
-    print(f"Writing the requested property price estimate to the following location \n") 
-    print(f"{outputFileName} \n") 
-    outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
-    json.dump(aPropertyPriceEstimate, fp = outputFile, ensure_ascii = False, indent = 4) 
+    print(f"Writing the requested suburb properties to the following folder \n") 
+    print(f"{locationPropertiesFolder} \n") 
 
-    exampleLocationTerms = "Rowville" 
-    print(f"Requesting properties in the given location \n") 
-    print(f"{exampleLocationTerms} \n") 
-    aLocationProperties = aPropertyReader.getPropertiesByLocation(
-        locationTerms = exampleLocationTerms) 
-    print(aLocationProperties) 
+    # Save the requested property IDs 
+    outputIDFileName = f"../data/raw/propertyIDs.txt" 
+    print(f"Writing the saved property IDs to the following location \n") 
+    print(f"{outputIDFileName} \n") 
+    outputIDFile = open(outputIDFileName, mode = "w") 
 
-    outputFileName = "locationProperties.json" 
-    print(f"Writing the requested properties to the following location \n") 
-    print(f"{outputFileName} \n") 
-    outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
-    json.dump(aLocationProperties, fp = outputFile, ensure_ascii = False, indent = 4) 
+    for suburb in victoriaSuburbs: 
 
+        print(f"Requesting properties from the following suburb \n") 
+        print(f"{suburb} \n") 
 
+        suburbProperties = aPropertyReader.getPropertiesByLocation(
+            locationTerms = suburb) 
+        
+        # Save the requested property IDs from the given suburb 
+        for property in suburbProperties: 
+
+            propertyID = property["id"] 
+            outputIDFile.write(f"{propertyID}\n") 
+    
+        outputFileName = f"{locationPropertiesFolder}/{suburb}.json" 
+        print(f"Writing the requested suburb properties to the following location \n") 
+        print(f"{outputFileName} \n") 
+        outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
+        json.dump(suburbProperties, fp = outputFile, ensure_ascii = False, indent = 4) 
+        outputFile.close() 
+    
+    # Close the property ID file after completion 
+    outputIDFile.close() 
 
 if __name__ == "__main__": 
 

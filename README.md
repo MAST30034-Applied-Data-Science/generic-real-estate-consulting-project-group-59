@@ -19,6 +19,7 @@ Setup instructions for the Domain Property API can be found below.
 2. Ensure that the following files are present. 
 
 - > domainAPIKey.json 
+- > victoriaSuburbs.txt 
 - > getDomainPropertyData.py 
 
 3. Update the following file with the new API key. 
