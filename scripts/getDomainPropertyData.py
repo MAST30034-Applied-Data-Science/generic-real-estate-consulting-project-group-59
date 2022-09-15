@@ -90,19 +90,36 @@ def main():
 
         suburbProperties = aPropertyReader.getPropertiesByLocation(
             locationTerms = suburb) 
+
+        suburbPropertiesFolder = f"../data/raw/locationProperties/{suburb}" 
+
+        # Ensure the suburb properties folder exists 
+        if not os.path.exists(suburbPropertiesFolder): 
+
+            os.makedirs(suburbPropertiesFolder) 
+
+        print(f"Writing the requested suburb properties to the following folder \n") 
+        print(f"{suburbPropertiesFolder} \n") 
         
         # Save the requested property IDs from the given suburb 
         for property in suburbProperties: 
 
+            # Ensure that the returned property is in the relevant suburb 
+            if property["addressComponents"]["suburb"] != suburb: 
+
+                continue 
+            
+            # Save the property ID 
             propertyID = property["id"] 
             outputIDFile.write(f"{propertyID}\n") 
-    
-        outputFileName = f"{locationPropertiesFolder}/{suburb}.json" 
-        print(f"Writing the requested suburb properties to the following location \n") 
-        print(f"{outputFileName} \n") 
-        outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
-        json.dump(suburbProperties, fp = outputFile, ensure_ascii = False, indent = 4) 
-        outputFile.close() 
+
+            # Save the requested property in the relevant suburb folder 
+            outputFileName = f"{suburbPropertiesFolder}/{propertyID}.json" 
+            print(f"Writing the requested property to the following location \n") 
+            print(f"{outputFileName} \n") 
+            outputFile = open(outputFileName, mode = "w", encoding = "utf-8") 
+            json.dump(property, fp = outputFile, ensure_ascii = False, indent = 4) 
+            outputFile.close() 
     
     # Close the property ID file after completion 
     outputIDFile.close() 
