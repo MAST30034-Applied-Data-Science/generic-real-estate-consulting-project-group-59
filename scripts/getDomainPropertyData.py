@@ -78,10 +78,23 @@ def main():
     print(f"{locationPropertiesFolder} \n") 
 
     # Save the requested property IDs 
-    outputIDFileName = f"../data/raw/propertyIDs.txt" 
-    print(f"Writing the saved property IDs to the following location \n") 
-    print(f"{outputIDFileName} \n") 
-    outputIDFile = open(outputIDFileName, mode = "w") 
+    outputPropertyIDFileName = f"../data/raw/propertyIDs.txt" 
+    print(f"Writing the saved properties to the following location \n") 
+    print(f"{outputPropertyIDFileName} \n") 
+    outputPropertyIDFile = open(outputPropertyIDFileName, mode = "w") 
+
+    # Save the requested properties 
+    outputPropertyFileName = f"../data/raw/locationProperties.txt" 
+    print(f"Writing the saved properties to the following location \n") 
+    print(f"{outputPropertyFileName} \n") 
+    outputPropertyFile = open(outputPropertyFileName, mode = "w") 
+
+    # Get the property column names 
+    propertyColNames = ["id", "address", "relativeScore"] 
+
+    for colName in propertyColNames: 
+
+        outputPropertyFile.write(f"{colName}\n") 
 
     for suburb in victoriaSuburbs: 
 
@@ -101,17 +114,27 @@ def main():
         print(f"Writing the requested suburb properties to the following folder \n") 
         print(f"{suburbPropertiesFolder} \n") 
         
-        # Save the requested property IDs from the given suburb 
+        # Save the requested properties from the given suburb 
         for property in suburbProperties: 
 
             # Ensure that the returned property is in the relevant suburb 
-            if property["addressComponents"]["suburb"] != suburb: 
+            propertySuburb = property["addressComponents"]["suburb"] 
+
+            if propertySuburb != suburb: 
 
                 continue 
             
             # Save the property ID 
             propertyID = property["id"] 
-            outputIDFile.write(f"{propertyID}\n") 
+
+            outputPropertyIDFile.write(f"{propertyID}\n") 
+            
+            # Save the property 
+            for colName in propertyColNames: 
+
+                colValue = property[colName] 
+
+                outputPropertyFile.write(f"{colValue}\n") 
 
             # Save the requested property in the relevant suburb folder 
             outputFileName = f"{suburbPropertiesFolder}/{propertyID}.json" 
@@ -122,7 +145,10 @@ def main():
             outputFile.close() 
     
     # Close the property ID file after completion 
-    outputIDFile.close() 
+    outputPropertyIDFile.close() 
+
+    # Close the property file after completion 
+    outputPropertyFile.close() 
 
 if __name__ == "__main__": 
 
