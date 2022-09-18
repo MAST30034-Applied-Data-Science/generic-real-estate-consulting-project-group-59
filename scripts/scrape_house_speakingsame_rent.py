@@ -10,10 +10,13 @@ from datetime import datetime as dt
 from glob import glob
 import re
 import time
+import os
 
 # constants
 BASE_URL = "http://house.speakingsame.com/"
 SEARCH_URL = "http://house.speakingsame.com/rp.php?q={}%2C+VIC&p={}"
+
+OUTPUT_DIR = "../data/raw/housespeakingsame/rent/"
 
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
@@ -26,16 +29,17 @@ proxy_list = proxies_response.json()
 all_proxies = [{"http": "http://{}:{}".format(p['ip'].strip(), p['portPreferred'].strip())} for p in proxy_list]
 proxies = [None]
 
-for i, prox in enumerate(all_proxies[:50]):
-    print(end='.')
-    try:
-        for k in range(3): requests.get(prox['http'], timeout=1)
-        proxies.append(prox)
-    except:continue
-    print(i,end='..',flush=True)
+# for i, prox in enumerate(all_proxies[:50]):
+#     print(end='.')
+#     try:
+#         for k in range(3): requests.get(prox['http'], timeout=1)
+#         proxies.append(prox)
+#     except:continue
+#     print(i,end='..',flush=True)
 
 
-def get(url):
+def get(url, delay=10, timeout=180):
+    time.sleep(delay)
     while True:
         for i, proxy in enumerate(proxies):
             try:
@@ -51,7 +55,7 @@ def get(url):
                 proxies.insert(0, proxies.pop(i))
                 return response
         print(end='|')
-        time.sleep(10)
+        time.sleep(timeout)
         requests.get(BASE_URL)
 
 def get_suburb_page(suburb, page):
@@ -80,14 +84,14 @@ def get_page_properties(soup):
             d['rent_date'] = rent.split(' in ')[1]
 
         type_rooms_ = p.findAll("b", string=re.compile(":"))[0].parent.text # property type & room counts
-        type_rooms = type_rooms_.replace(':', ' ').split()
-        if len(type_rooms): 
-            d['property_type'] = type_rooms[0]
+        colon = type_rooms_.index(':')
+        property_type, type_rooms = type_rooms_[:colon], type_rooms_[colon+1:].split()            
+        d['property_type'] = property_type
         
         room_types = [im['title'] for im in 
                       p.findAll('img')] # room count types
         
-        for room_type, count in zip(room_types, type_rooms[1:]):
+        for room_type, count in zip(room_types, type_rooms):
             d[room_type] = count
 
         map_link_suffix = p.find("a", string="Map")
@@ -136,20 +140,18 @@ def get_suburbs(verbose=True, cd=20, topn=None, start=None, stop=None, save=True
     for i, suburb in enumerate(suburbs['suburb'].values[start:stop]):
         if verbose: print(suburb, end='..', flush=True)
         df = get_suburb(suburb, verbose=verbose, cd=cd)
-        df.to_csv(f"../data/raw/housespeakingsame/{suburb}_{dt.now().isoformat()}.csv", index=False)
+        df.to_csv(OUTPUT_DIR + f"{suburb}_{dt.now().isoformat()}.csv", index=False)
         dfs.append(df)
     return pd.concat(dfs)
 
-# r,s,d = get_suburb_page("Neerim South", 8)
-# d
-# d = get_suburb("Neerim South")
-
 if __name__ == "__main__":
+    if not os.path.exists(OUTPUT_DIR):
+        os.mkdir(OUTPUT_DIR)
     # topn = 100
-    start, stop = 0, 100
+    start, stop = 100, 200
     # df = get_suburbs(topn=topn)
     # df.to_csv(f'../data/raw/rent_data_{topn}_{dt.now().isoformat()}.csv', index=False)
     df = get_suburbs(start=start, stop=stop)
     df = df.astype({'page': int})
-    df.to_csv(f'../data/raw/rent_data_{start}-{stop}_{dt.now().isoformat()}.csv', index=False)
+    df.to_csv(OUTPUT_DIR + f'data_{start}-{stop}_{dt.now().isoformat()}.csv', index=False)
 

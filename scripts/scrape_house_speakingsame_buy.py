@@ -66,8 +66,8 @@ def get_suburb_page(suburb, page):
 def extract_price_date(obj, prefix):
     obj = obj.parent.text.split(' in ')
     price = obj[0].replace(prefix, '')
+    is_auction = "(Auction)" in obj[1]
     date = obj[1].replace("(Auction)", '')
-    is_auction = "(Auction)" in obj
     return price, date, is_auction # price & date & auction
     
 def get_page_properties(soup):
@@ -90,14 +90,14 @@ def get_page_properties(soup):
         type_rooms_ = p.findAll("b", string=re.compile("(?<!Agent)(?<!size)(?<!ist)(?<!isting):"))
         if type_rooms_:
             type_rooms_ = type_rooms_[0].parent.text # property type & room counts
-            type_rooms = type_rooms_.replace(':', ' ').split()
-            if len(type_rooms): 
-                d['property_type'] = type_rooms[0]
+            colon = type_rooms_.index(':')
+            property_type, type_rooms = type_rooms_[:colon], type_rooms_[colon+1:].split()            
+            d['property_type'] = property_type
         
             room_types = [im['title'] for im in 
                           p.findAll('img')] # room count types
             if len(room_types):
-                for room_type, count in zip(room_types, type_rooms[1:]):
+                for room_type, count in zip(room_types, type_rooms):
                     d[room_type] = count
 
         map_link_suffix = p.find("a", string="Map")
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
     # topn = 100
-    start, stop = 2,100
+    start, stop = 100, 200
     # df = get_suburbs(topn=topn)
     # df.to_csv(f'../data/raw/rent_data_{topn}_{dt.now().isoformat()}.csv', index=False)
     df = get_suburbs(start=start, stop=stop)
