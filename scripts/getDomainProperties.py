@@ -111,7 +111,7 @@ def main():
             propertyStreetTypeLong = property["streetTypeLong"] 
             propertySuburb = property["suburb"] 
 
-            propertyLine = f"{propertyID},{propertyLat},{propertyLon},{propertyAddressID},{propertyBathrooms},{propertyBedrooms},{propertyCarSpaces},{propertyCreated},{propertyFeatures},{propertyIsResidential},{propertyPhotos},{propertyPlanNumber},{propertyPostcode},{propertyCategory},{propertyState},{propertyStatus},{propertyStreetAddress},{propertyStreetName},{propertyStreetNumber},{propertyStreetTypeLong},{propertySuburb}" 
+            propertyLine = f"{propertyID},{propertyCanonicalUrl},{propertyLat},{propertyLon},{propertyAddressID},{propertyBathrooms},{propertyBedrooms},{propertyCarSpaces},{propertyCreated},{propertyFeatures},{propertyIsResidential},{propertyPhotos},{propertyPlanNumber},{propertyPostcode},{propertyCategory},{propertyState},{propertyStatus},{propertyStreetAddress},{propertyStreetName},{propertyStreetNumber},{propertyStreetTypeLong},{propertySuburb}" 
 
             outputPropertyFile.write(f"{propertyLine}\n") 
         except Exception as e: 
