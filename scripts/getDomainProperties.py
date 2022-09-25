@@ -104,29 +104,36 @@ def main():
         propertyJSONFile.close() 
 
         # Get the property line 
-        propertyCanonicalUrl = property["canonicalUrl"] 
-        propertyLat = property["addressCoordinate"]["lat"] 
-        propertyLon = property["addressCoordinate"]["lon"] 
-        propertyAddressID = property["addressId"] 
-        propertyBathrooms = property["bathrooms"] 
-        propertyBedrooms = property["bedrooms"] 
-        propertyCarSpaces = property["carSpaces"] 
-        propertyCreated = property["created"] 
-        propertyFeatures = " ".join(property["features"]) 
-        propertyIsResidential = property["isResidential"] 
+        propertyCanonicalUrl = property.get("canonicalUrl") 
+        
+        propertyLat = "" 
+        propertyLon = "" 
+
+        if "addressCoordinate" in property: 
+
+            propertyLat = property["addressCoordinate"].get("lat") 
+            propertyLon = property["addressCoordinate"].get("lon") 
+
+        propertyAddressID = property.get("addressId") 
+        propertyBathrooms = property.get("bathrooms") 
+        propertyBedrooms = property.get("bedrooms") 
+        propertyCarSpaces = property.get("carSpaces") 
+        propertyCreated = property.get("created") 
+        propertyFeatures = " ".join(property.get("features", [])) 
+        propertyIsResidential = property.get("isResidential") 
         propertyPhotos = " ".join(
-            [photo["fullUrl"] for photo in property["photos"]]
+            [photo["fullUrl"] for photo in property.get("photos", [])] 
         ) 
-        propertyPlanNumber = property["planNumber"] 
-        propertyPostcode = property["postcode"] 
-        propertyCategory = property["propertyCategory"] 
-        propertyState = property["state"] 
-        propertyStatus = property["status"] 
-        propertyStreetAddress = property["streetAddress"] 
-        propertyStreetName = property["streetName"] 
-        propertyStreetNumber = property["streetNumber"] 
-        propertyStreetTypeLong = property["streetTypeLong"] 
-        propertySuburb = property["suburb"] 
+        propertyPlanNumber = property.get("planNumber") 
+        propertyPostcode = property.get("postcode") 
+        propertyCategory = property.get("propertyCategory") 
+        propertyState = property.get("state") 
+        propertyStatus = property.get("status") 
+        propertyStreetAddress = property.get("streetAddress") 
+        propertyStreetName = property.get("streetName") 
+        propertyStreetNumber = property.get("streetNumber") 
+        propertyStreetTypeLong = property.get("streetTypeLong") 
+        propertySuburb = property.get("suburb") 
 
         propertyLine = f"{propertyID},{propertyCanonicalUrl},{propertyLat},{propertyLon},{propertyAddressID},{propertyBathrooms},{propertyBedrooms},{propertyCarSpaces},{propertyCreated},{propertyFeatures},{propertyIsResidential},{propertyPhotos},{propertyPlanNumber},{propertyPostcode},{propertyCategory},{propertyState},{propertyStatus},{propertyStreetAddress},{propertyStreetName},{propertyStreetNumber},{propertyStreetTypeLong},{propertySuburb}" 
 
