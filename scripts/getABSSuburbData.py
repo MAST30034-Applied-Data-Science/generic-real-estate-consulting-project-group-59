@@ -1,4 +1,5 @@
 
+from operator import sub
 import os 
 import requests 
 
@@ -49,22 +50,116 @@ def main():
         downloadFile(locationABSFileURL, downloadLocation) 
 
     print("Reading the downloaded location files ") 
-    meshBlockData = pandas.read_excel("../data/raw/MB_2021_AUST.xlsx") 
-    # statisticalArea1Data = pandas.read_excel("../data/raw/SA1_2021_AUST.xlsx") 
-    # statisticalArea2Data = pandas.read_excel("../data/raw/SA2_2021_AUST.xlsx") 
-    # statisticalArea3Data = pandas.read_excel("../data/raw/SA3_2021_AUST.xlsx") 
-    statisticalArea4Data = pandas.read_excel("../data/raw/SA4_2021_AUST.xlsx") 
-    localGovernmentAreaData = pandas.read_excel("../data/raw/LGA_2021_AUST.xlsx") 
-    suburbData = pandas.read_excel("../data/raw/SAL_2021_AUST.xlsx") 
+
+    downloadFolder = "../data/raw" 
+
+    meshBlockName = "MB_2021_AUST" 
+    print(f"Reading {meshBlockName} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{meshBlockName}.csv")): 
+
+        print(f"{downloadFolder}/{meshBlockName}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{meshBlockName}.csv ")
+        meshBlockData = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{meshBlockName}.xlsx")) 
+        meshBlockData.to_csv(f"{downloadFolder}/{meshBlockName}.csv") 
+    
+    meshBlockData = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{meshBlockName}.csv")) 
+
+    statisticalArea1Name = "SA1_2021_AUST" 
+    print(f"Reading {statisticalArea1Name} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{statisticalArea1Name}.csv")): 
+
+        print(f"{downloadFolder}/{statisticalArea1Name}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{statisticalArea1Name}.csv ")
+        statisticalArea1Data = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{statisticalArea1Name}.xlsx")) 
+        statisticalArea1Data.to_csv(f"{downloadFolder}/{statisticalArea1Name}.csv") 
+    
+    statisticalArea1Data = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{statisticalArea1Name}.csv")) 
+
+    statisticalArea2Name = "SA2_2021_AUST" 
+    print(f"Reading {statisticalArea2Name} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{statisticalArea2Name}.csv")): 
+
+        print(f"{downloadFolder}/{statisticalArea2Name}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{statisticalArea2Name}.csv ")
+        statisticalArea2Data = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{statisticalArea2Name}.xlsx")) 
+        statisticalArea2Data.to_csv(f"{downloadFolder}/{statisticalArea2Name}.csv") 
+    
+    statisticalArea2Data = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{statisticalArea2Name}.csv")) 
+
+    statisticalArea3Name = "SA3_2021_AUST" 
+    print(f"Reading {statisticalArea3Name} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{statisticalArea3Name}.csv")): 
+
+        print(f"{downloadFolder}/{statisticalArea3Name}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{statisticalArea3Name}.csv ")
+        statisticalArea3Data = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{statisticalArea3Name}.xlsx")) 
+        statisticalArea3Data.to_csv(f"{downloadFolder}/{statisticalArea3Name}.csv") 
+    
+    statisticalArea3Data = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{statisticalArea3Name}.csv")) 
+
+    statisticalArea4Name = "SA4_2021_AUST" 
+    print(f"Reading {statisticalArea4Name} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{statisticalArea4Name}.csv")): 
+
+        print(f"{downloadFolder}/{statisticalArea4Name}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{statisticalArea4Name}.csv ")
+        statisticalArea4Data = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{statisticalArea4Name}.xlsx")) 
+        statisticalArea4Data.to_csv(f"{downloadFolder}/{statisticalArea4Name}.csv") 
+    
+    statisticalArea4Data = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{statisticalArea4Name}.csv")) 
+
+    localGovernmentAreaName = "LGA_2021_AUST" 
+    print(f"Reading {localGovernmentAreaName} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{localGovernmentAreaName}.csv")): 
+
+        print(f"{downloadFolder}/{localGovernmentAreaName}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{localGovernmentAreaName}.csv ")
+        localGovernmentAreaData = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{localGovernmentAreaName}.xlsx")) 
+        localGovernmentAreaData.to_csv(f"{downloadFolder}/{localGovernmentAreaName}.csv") 
+    
+    localGovernmentAreaData = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{localGovernmentAreaName}.csv")) 
+
+    suburbName = "SAL_2021_AUST" 
+    print(f"Reading {suburbName} ") 
+
+    if (os.path.exists(f"{downloadFolder}/{suburbName}.csv")): 
+
+        print(f"{downloadFolder}/{suburbName}.csv found ") 
+    else: 
+
+        print(f"Creating {downloadFolder}/{suburbName}.csv ")
+        suburbData = pandas.DataFrame(pandas.read_excel(f"{downloadFolder}/{suburbName}.xlsx")) 
+        suburbData.to_csv(f"{downloadFolder}/{suburbName}.csv") 
+    
+    suburbData = pandas.DataFrame(pandas.read_csv(f"{downloadFolder}/{suburbName}.csv")) 
 
     print(statisticalArea4Data.head(n = 5)) 
     print(localGovernmentAreaData.head(n = 5)) 
 
-    # Join the mesh block data with the suburb data 
-    print(meshBlockData.describe()) 
-
-    meshBlockData.merge(other = suburbData, on = "MB_CODE_2021") 
-    meshBlockData.to_csv("../data/raw/suburbData.csv") 
+    # Join the suburb data with the LGA and SA2 data 
+    suburbData = suburbData.merge(
+        right = localGovernmentAreaData[['MB_CODE_2021','LGA_CODE_2021']], 
+        on = "MB_CODE_2021")
+    
+    suburbData.to_csv(f"{downloadFolder}/suburbData.csv") 
 
 if __name__ == "__main__": 
 
