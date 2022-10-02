@@ -156,7 +156,7 @@ def main():
 
     # Join the suburb data with the LGA and SA2 data 
     suburbData = suburbData.merge(
-        right = localGovernmentAreaData[['MB_CODE_2021','LGA_CODE_2021']], 
+        right = localGovernmentAreaData[["MB_CODE_2021","LGA_CODE_2021", "LGA_NAME_2021"]], 
         on = "MB_CODE_2021")
     
     suburbData.to_csv(f"{downloadFolder}/suburbData.csv") 
