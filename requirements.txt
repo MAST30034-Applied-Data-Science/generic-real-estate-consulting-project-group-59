@@ -1,0 +1,8 @@
+The following packages must be installed to run the code in this repo.
+
+pandas
+geopandas
+glob
+folium
+seaborn
+matplotlib
