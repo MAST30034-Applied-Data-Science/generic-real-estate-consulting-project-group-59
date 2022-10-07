@@ -5,14 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
+from pathlib import Path
 import time
 
 # constants
 BASE_URL = "http://house.speakingsame.com/"
 TABLE_URLS = {
-    # "rent" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=RentPrice&name=",
-    # "sold" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=HomePrice&name=",
-    # "turnover" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=Housing+Turnover&name=Last+12+months",
+    "rent" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=RentPrice&name=",
+    "sold" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=HomePrice&name=",
+    "turnover" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=Housing+Turnover&name=Last+12+months",
     "income" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=Median+household+income&name=Weekly+income",
     "occupation" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=Occupation&name=Professionals",
     "education" : "http://house.speakingsame.com/suburbtop.php?sta=vic&cat=Education&name=University+or+other+Tertiary+Institution",
@@ -116,6 +117,6 @@ def get_all(verbose=True):
 
 
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR): os.mkdir(OUTPUT_DIR)
+    if not os.path.exists(OUTPUT_DIR): Path.mkdir(Path(OUTPUT_DIR), parents=True)
     print("Obtaining Suburb Top Ranks for...")
     df = get_all()
