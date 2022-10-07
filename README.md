@@ -6,6 +6,12 @@ Groups should generate their own suitable `README.md`.
 
 Welcome to the Domain Property Data API. 
 
+# HouseSpeakingSame Data
+
+1. Navigate to `/scripts/`
+2. Execute `scrape_house_speakingsame_suburbs.py`
+
+
 ## Setup Instructions 
 
 Setup instructions for the Domain Property API can be found below. 
