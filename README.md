@@ -16,11 +16,12 @@ Welcome to the Domain Property Data API.
 
 
 notes: The download link is temporary link from https://datashare.maps.vic.gov.au/. It might be expired anytime in the future
-    Instruction to reorder the PTV data:
-      1. go to https://datashare.maps.vic.gov.au/
-      2. search "Public Transport a collection of PTV datasets"
-      3. Projection: Geographicals on GDA94. Buffer: No buffer. File Format: ESRI File Geodatabase. Area: Custom Cookie-  VICTORIA_BUFF
-      4. The data will be sent by email within one bussiness day.
+
+Instruction to reorder the PTV data:
+1. go to https://datashare.maps.vic.gov.au/
+2. search "Public Transport a collection of PTV datasets"
+3. Projection: Geographicals on GDA94. Buffer: No buffer. File Format: ESRI File Geodatabase. Area: Custom Cookie-  VICTORIA_BUFF
+4. The data will be sent by email within one bussiness day.
 
 ## Setup Instructions 
 
