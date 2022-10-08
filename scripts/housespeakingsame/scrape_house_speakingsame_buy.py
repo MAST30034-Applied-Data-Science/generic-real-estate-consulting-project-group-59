@@ -176,7 +176,7 @@ if __name__ == "__main__":
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
     # topn = 100
-    start, stop = 100, 200
+    start, stop = 0, 200
     # df = get_suburbs(topn=topn)
     # df.to_csv(f'../data/raw/rent_data_{topn}_{dt.now().isoformat()}.csv', index=False)
     df = get_suburbs(start=start, stop=stop)
