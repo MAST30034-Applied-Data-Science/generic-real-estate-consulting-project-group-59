@@ -11,9 +11,12 @@ Welcome to the Domain Property Data API.
 1. Navigate to `/scripts/`
 2. Execute `scrape_house_speakingsame_suburbs.py`
 
-# PTV Data
-1. Run PTVdataProcessing.ipynb to download and see analysis of data
+# Crime Data
+crime.ipynb will contain both download and analysis
 
+# PTV Data
+1. Run PTVdataProcessing.ipynb to download and see analysis of data.
+2. Run ipynb file in PTV_visualisations folders to get vistualisation.
 
 notes: The download link is temporary link from https://datashare.maps.vic.gov.au/. It might be expired anytime in the future
 
