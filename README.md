@@ -17,6 +17,20 @@ Welcome to the Domain Property Data API.
 2. Execute `scrape_house_speakingsame_suburbs.py`
 3. Execute `preprocess_house_speakingsame_suburbs.py`
 
+# Crime Data
+crime.ipynb will contain both download and analysis
+
+# PTV Data
+1. Run PTVdataProcessing.ipynb to download and see analysis of data.
+2. Run ipynb file in PTV_visualisations folders to get vistualisation.
+
+notes: The download link is temporary link from https://datashare.maps.vic.gov.au/. It might be expired anytime in the future
+
+Instruction to reorder the PTV data:
+1. go to https://datashare.maps.vic.gov.au/
+2. search "Public Transport a collection of PTV datasets"
+3. Projection: Geographicals on GDA94. Buffer: No buffer. File Format: ESRI File Geodatabase. Area: Custom Cookie-  VICTORIA_BUFF
+4. The data will be sent by email within one bussiness day.
 
 ## Setup Instructions 
 
