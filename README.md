@@ -15,7 +15,7 @@ All group 59 members:
 * Arjun Rajkumar
 
 # Requirements
-using pip exec requirement.txt to install environment to run the project
+using pip exec requirement.txt to install environment
 
 # Preliminary Setup
 1. Navigate to `/scripts/`
