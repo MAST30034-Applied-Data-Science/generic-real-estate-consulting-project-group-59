@@ -14,7 +14,8 @@ All group 59 members:
 * Jiajia Guo
 * Arjun Rajkumar
 
-
+# Requirements
+using pip exec requirement.txt to install environment to run the project
 
 # Preliminary Setup
 1. Navigate to `/scripts/`
