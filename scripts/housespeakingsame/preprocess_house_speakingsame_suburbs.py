@@ -21,5 +21,6 @@ def preprocess():
         df.to_csv(OUTPUT_DIR + fname)
 
 if __name__ == "__main__":
-    if not os.path.exists(DATA_DIR): Path.mkdir(Path(DATA_DIR), parents=True)
+#     if not os.path.exists(DATA_DIR): Path.mkdir(Path(DATA_DIR), parents=True)
+    if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
     preprocess()
