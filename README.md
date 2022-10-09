@@ -17,22 +17,6 @@ All group 59 members:
 # Requirements
 using pip exec requirement.txt to install environment
 
-# Preliminary Setup
-1. Navigate to `/scripts/`
-2. Execute `get_suburbs_shp.py`
-3. Obtain ORS data (through download)
-4. Execute `/notebooks/PTVdataProcessing.ipynb`
-
-# HouseSpeakingSame Data
-
-1. Navigate to `/scripts/housespeakingsame`
-2. Execute `scrape_house_speakingsame_suburbs.py`
-3. Execute `preprocess_house_speakingsame_suburbs.py`
-4. Execute `scrape_house_speakingsame_schools.py`
-
-
-
-
 # Instructions to Reproduce
 
 ## [House SpeakingSame](http://house.speakingsame.com/)
