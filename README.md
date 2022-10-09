@@ -1,6 +1,17 @@
 # Generic Real Estate Consulting Project
-Groups should generate their own suitable `README.md`.
+This Generic Real Estate Consulting Project is focusing on investgating and predicting the rent price.
+The project is also including:
+1. Internal and external features in predicting rental prices
+2. Top 10 suburbs with the highest predicted growth rate?
+3. Liveable and affordable suburbs
 
+# Contributors
+All group 59 members:
+* Terry Chow
+* Zhiquan Lai
+* Manish Khilari
+* Jiajia Guo
+* Arjun Rajkumar
 
 # Domain Property Data 
 
