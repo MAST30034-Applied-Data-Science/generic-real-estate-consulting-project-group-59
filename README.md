@@ -7,12 +7,12 @@ This project is also including:
 3. Liveable and affordable suburbs
 
 # Contributors
-All group 59 members:
-* Terry Chow
-* Zhiquan Lai
-* Manish Khilari
-* Jiajia Guo
-* Arjun Rajkumar
+All **group 59** members:
+* Terry Chow 1138391
+* Zhiquan Lai 1118797
+* Manish Khilari 1173214
+* Jiajia Guo 1135319
+* Arjun Rajkumar 910941
 
 # Requirements
 using pip exec requirement.txt to install environment
