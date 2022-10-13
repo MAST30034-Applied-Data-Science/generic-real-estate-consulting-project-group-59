@@ -34,6 +34,7 @@ variables = [
 app = Dash(__name__)
 server = app.server
 
+# Slider for Decimal Precision Display
 dp_layout = [
     html.Div("Decimal Precision"),
     daq.Slider(
@@ -44,6 +45,7 @@ dp_layout = [
     html.Br()
 ]
 
+# Slider for Top N to display
 topn_layout = [
     html.Div(id='topn-output'),
     daq.Slider(
@@ -54,6 +56,7 @@ topn_layout = [
     html.Br()
 ]
 
+# Construct sliders for each variable
 selection_layout = []
 for var in variables:
     selection_layout.append(html.Div(var.capitalize()))
@@ -63,8 +66,10 @@ for var in variables:
     ))
     selection_layout.append(html.Br())
     
+# Full slider menu layout
 menu_layout = html.Div(dp_layout + topn_layout + selection_layout)
 
+# Full app layout
 app.layout = html.Div([
     html.H1('Suburb Liveability Attribute Rankings in Top %'),
     html.Div([menu_layout, dcc.Graph(id="graph", style={'width':'90%','height':'90%'})], 
@@ -77,10 +82,16 @@ app.layout = html.Div([
     Input("topn", "value"),
     *tuple(Input(var, "value") for var in variables))
 def filter_heatmap(dp, topn, *kwargs):
+    """
+    Updates the heatmap display when any slider variables are changed
+    """
+    # Don't display variables with 0 importance
     drop_cols = np.array(weight_cols)[np.array(kwargs)==0]
     select_cols = np.array(weight_cols)[np.array(kwargs)!=0]
+    # Weight score by user slider settings
     select_kwargs = np.array(kwargs)[np.array(kwargs)!=0]
     df['Weighted Mean'] = ((df[select_cols] * select_kwargs) / 10).mean(axis=1)
+    # Heatmap sorted by user influenced score
     fig = px.imshow(df.drop(drop_cols, axis=1).nsmallest(topn, 'Weighted Mean').round(dp), 
                     text_auto=True)
     
@@ -91,6 +102,7 @@ def filter_heatmap(dp, topn, *kwargs):
     Input('topn', 'value')
 )
 def update_topn(value):
+    # Dynamically update suburb slider text
     return f'Top {value} Suburbs'
 
 app.run_server(debug=True)
