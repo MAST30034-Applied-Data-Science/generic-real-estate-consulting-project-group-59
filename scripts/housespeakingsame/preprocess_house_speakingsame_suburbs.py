@@ -11,6 +11,9 @@ OUTPUT_DIR = "../../data/curated/housespeakingsame/top/"
 TURNOVER_PAT = r"([\d\.]+)\s\((\d+)/(\d+)\)" # turnover format pattern
 
 def preprocess():
+    """
+    Preprocess value strings into numbers for suburb ranking tables
+    """
     for p in glob(DATA_DIR + '*.csv'):
         fname = p.split('/')[-1]
         df = pd.read_csv(p)
@@ -21,6 +24,5 @@ def preprocess():
         df.to_csv(OUTPUT_DIR + fname)
 
 if __name__ == "__main__":
-#     if not os.path.exists(DATA_DIR): Path.mkdir(Path(DATA_DIR), parents=True)
     if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
     preprocess()

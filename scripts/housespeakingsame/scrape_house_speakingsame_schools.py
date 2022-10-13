@@ -19,6 +19,9 @@ def get(url):
             return response  
 
 def scrape_page():
+    """
+    Scrape the school rankings & counts page from Housespeakingsame
+    """
     bs_obj = BeautifulSoup(get(URL).content, "html.parser")
     tab = bs_obj.find("table", {"cellspacing": "0", "cellpadding": "5", "width": "100%"})
     rows = tab.findAll("tr")

@@ -21,6 +21,7 @@ OUTPUT_DIR = "../data/raw/housespeakingsame/rent/"
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
 
+# Suburb rent value rankings
 suburbs = pd.read_csv(sorted(glob("../data/raw/top_rent_suburbs_*.csv"))[-1])
 
 PROXIES_URL = 'https://free-proxy-list.net/'
@@ -29,6 +30,7 @@ proxy_list = proxies_response.json()
 all_proxies = [{"http": "http://{}:{}".format(p['ip'].strip(), p['portPreferred'].strip())} for p in proxy_list]
 proxies = [None]
 
+# # Find working proxies
 # for i, prox in enumerate(all_proxies[:50]):
 #     print(end='.')
 #     try:
@@ -39,6 +41,9 @@ proxies = [None]
 
 
 def get(url, delay=10, timeout=180):
+    """
+    GET request to property search pages with error/timeout handling
+    """
     time.sleep(delay)
     while True:
         for i, proxy in enumerate(proxies):
@@ -59,12 +64,18 @@ def get(url, delay=10, timeout=180):
         requests.get(BASE_URL)
 
 def get_suburb_page(suburb, page):
+    """
+    Retrieve all properties from the given suburb and search page
+    """
     response = get(SEARCH_URL.format(suburb.replace(' ', '+'), page))
     soup = BeautifulSoup(response.content, "html.parser")
     df = get_page_properties(soup)
     return response, soup, df
 
 def get_page_properties(soup):
+    """
+    Extracts rent & sold price & date & whether it was an auction
+    """
     properties = soup.find("div", id="setFilter").parent.findAll(
         "table", {"width": "100%", "cellspacing": 0, "cellpadding": 0})
     if len(properties) == 0: return # Last page, no data
@@ -110,6 +121,9 @@ def get_page_properties(soup):
     return pd.concat(dfs)
 
 def get_suburb(suburb, verbose=True, cd=20):
+    """
+    Retrieve all properties from a given search page
+    """
     page = 0
     dfs = pd.DataFrame(columns=['link'])
     while True:
@@ -134,6 +148,9 @@ def get_suburb(suburb, verbose=True, cd=20):
     return dfs
 
 def get_suburbs(verbose=True, cd=20, topn=None, start=None, stop=None, save=True):
+    """
+    Retrieve all properties and search pages of a given suburb
+    """
     dfs = []
     if verbose: print("Getting", topn if topn else "all", flush=True)
     # for i, suburb in enumerate(suburbs['suburb'].values[:topn]):
@@ -147,10 +164,7 @@ def get_suburbs(verbose=True, cd=20, topn=None, start=None, stop=None, save=True
 if __name__ == "__main__":
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
-    # topn = 100
     start, stop = 0, 200
-    # df = get_suburbs(topn=topn)
-    # df.to_csv(f'../data/raw/rent_data_{topn}_{dt.now().isoformat()}.csv', index=False)
     df = get_suburbs(start=start, stop=stop)
     df = df.astype({'page': int})
     df.to_csv(OUTPUT_DIR + f'data_{start}-{stop}_{dt.now().isoformat()}.csv', index=False)

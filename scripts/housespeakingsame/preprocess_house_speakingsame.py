@@ -14,6 +14,9 @@ sub_rent_paths = glob('../data/raw/housespeakingsame/rent/*.csv')
 sub_buy_paths = glob('../data/raw/housespeakingsame/buy/*.csv')
 
 def parse_date(x):
+    """
+    Parse date string from scraped rent & sold dates into dt objects
+    """
     if pd.notna(x):
         x = x.strip()
         n = len(x.split())
@@ -23,6 +26,9 @@ def parse_date(x):
     else: return x
 
 def land_building_size(x):
+    """
+    Parse land & building size strings when present
+    """
     if pd.isna(x): return x, x
     lb = x.split('|')
     if len(lb)==2: return int(lb[0]), int(lb[1].replace("Building size: ", ''))
@@ -34,6 +40,9 @@ def cast_int(x):
     except ValueError: return np.nan
 
 def parse_list(x):
+    """
+    Parse list prices
+    """
     if pd.isna(x): return x, x, x, x
     is_over = 'over' in x
     x = re.sub("list|over|\$|,", '', x)
@@ -47,6 +56,9 @@ def parse_list(x):
     
 
 def prepo(df):
+    """
+    Preprocess scraped internal features
+    """
     df['suburb'] = df['link'].str.findall("q=[^\&]*").apply(lambda x: x[0].replace('q=','').replace('+', ' '))
     df['sold_price'] = df['sold_price_'].str.replace('\$|,|undisclosed','').apply(lambda x: float(x) if x else np.nan)
     df['sold_date'] = df['sold_date_'].apply(parse_date)
@@ -63,6 +75,7 @@ def prepo(df):
     return df
 
 if __name__=="__main__":
+    # Read raw sold & rent property data
     bdf = pd.concat([pd.read_csv(csv) for csv in sub_buy_paths]).drop_duplicates(subset=['link'])
     rdf = pd.concat([pd.read_csv(csv) for csv in sub_rent_paths]).drop_duplicates(subset=['link'])
     

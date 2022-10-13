@@ -81,41 +81,6 @@ def get_all(verbose=True):
         df = get_suburbs(url, verbose)
         df.to_csv(OUTPUT_DIR + name + ".csv", index=False)
 
-# def get_suburb_sales_data(ingredients):
-#     # Get "Sales Data" table from suburb profile page    
-#     soup = BeautifulSoup(ingredients, "html.parser")
-#     # heading = soup.find("table", {"style": "font-size:18px"}) # Suburb Post code & (distnace to CBD link)
-#     # sub_pc = heading.find('b').text
-#     sales_table = soup.find("table", {"style": "font-size:13px", "cellspacing": 10})
-#     
-#     table_data = sales_table.findAll("td")
-#     assert table_data[0].text == "Sales Data"
-#     cell_data = table_data[2:]
-#     
-#     sales_data = []
-#     for i in range(0, len(cell_data), 3):    
-#         sales_data.append([cell_data[i].text, cell_data[i+2].text])
-#     sales_df = pd.DataFrame(sales_data, columns=['key','value'])
-#     return sales_df
-# 
-# def get_suburbs_sales_data(verbose=True):
-#     sales_df = pd.DataFrame()
-#     errors = []
-#     if verbose: print(len(df['link'].values))
-#     for i, link in enumerate(df['link'].values):
-#         if verbose: print(i, end='..')
-#         try:
-#             sub_sales_df = get_suburb_sales_data(get(link).content)
-#             sub_sales_df['link'] = link
-#             sales_df = pd.concat([sales_df, sub_sales_df])
-#         except AttributeError:
-#             # No "Sales Data" table
-#             errors.append(link)
-#     if verbose: print(len(errors), "errors")
-#     return sales_df, errors
-
-
-
 if __name__ == "__main__":
     if not os.path.exists(OUTPUT_DIR): Path.mkdir(Path(OUTPUT_DIR), parents=True)
     print("Obtaining Suburb Top Ranks for...")
