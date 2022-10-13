@@ -6,8 +6,7 @@ This project is also including:
 2. Top 10 suburbs with the highest predicted growth rate?
 3. Liveable and affordable suburbs
 
-# Contributors
-All **group 59** members:
+# Contributors Group 59
 * Terry Chow 1138391
 * Zhiquan Lai 1118797
 * Manish Khilari 1173214
