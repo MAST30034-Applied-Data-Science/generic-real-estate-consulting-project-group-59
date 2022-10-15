@@ -1,0 +1,3389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ced3bf3864184406a8cfcbe877091487</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<blockquote>
+<p>In[1]:<strong>import</strong>pandas<strong>as</strong>pd</p>
+<p><strong>import</strong>numpy<strong>as</strong>np</p>
+<p><strong>import</strong>matplotlib.pyplot<strong>as</strong>plt</p>
+<p><strong>import</strong>seaborn<strong>as</strong>sns</p>
+<p><strong>import</strong>plotly.express<strong>as</strong>px</p>
+<p>In[2]: %matplotlibinline</p>
+<p><strong>import</strong>warnings</p>
+<p>warnings.filterwarnings('ignore')</p>
+</blockquote>
+<p>In[3]:train <strong>=</strong> pd.read_csv("../input/house-prices-advanced-regression-techniques/train.csv")test<strong>=</strong>pd.read_csv("../input/house-prices-advanced-regression-techniques/test.csv")</p>
+<p>In[4]:print(train.head())</p>
+<blockquote>
+<p>IdMSSubClass MSZoningLotFrontageLotArea Street Alley LotShape\</p>
+</blockquote>
+<ol start="0" type="1">
+<li><blockquote>
+<p>1 60 RL 65.0 8450 Pave NaN Reg</p>
+</blockquote></li>
+<li><blockquote>
+<p>2 20 RL 80.0 9600 Pave NaN Reg2 3 60 RL 68.0 11250 Pave NaN IR13 4 70 RL 60.0 9550 Pave NaN IR14 5 60RL84.014260PaveNaNIR1</p>
+</blockquote></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>LandContour</th>
+<th>Utilities ... PoolArea</th>
+<th>PoolQC</th>
+<th>Fence</th>
+<th>MiscFeature</th>
+<th>MiscVal</th>
+<th>MoSold</th>
+<th><blockquote>
+<p>\</p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 Lvl</td>
+<td>AllPub ... 0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1 Lvl</td>
+<td>AllPub ... 0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>5</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2 Lvl</td>
+<td>AllPub ... 0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>9</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3 Lvl</td>
+<td>AllPub ... 0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4 Lvl</td>
+<td>AllPub ... 0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>12</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>YrSold</th>
+<th>SaleType</th>
+<th>SaleCondition</th>
+<th>SalePrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 2008</td>
+<td>WD</td>
+<td>Normal</td>
+<td>208500</td>
+</tr>
+<tr class="even">
+<td>1 2007</td>
+<td>WD</td>
+<td>Normal</td>
+<td>181500</td>
+</tr>
+<tr class="odd">
+<td>2 2008</td>
+<td>WD</td>
+<td>Normal</td>
+<td>223500</td>
+</tr>
+<tr class="even">
+<td>3 2006</td>
+<td>WD</td>
+<td>Abnorml</td>
+<td>140000</td>
+</tr>
+<tr class="odd">
+<td>4 2008</td>
+<td>WD</td>
+<td>Normal</td>
+<td>250000</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[5 rows x 81 columns]</p>
+<p>In[5]:</p>
+<p>Id MSSubClass MSZoning LotFrontage LotArea Street Alley LotShape \0 1461 20 RH 80.0 11622 Pave NaN Reg</p>
+<p>1 1462 20 RL 81.0 14267 Pave NaN IR1</p>
+<p>2 1463 60 RL 74.0 13830 Pave NaN IR1</p>
+<p>3 1464 60 RL 78.0 9978 Pave NaN IR1</p>
+<p>4 1465 120 RL 43.0 5005 Pave NaN IR1</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>LandContour</th>
+<th>Utilities ... ScreenPorch</th>
+<th>PoolArea</th>
+<th>PoolQC</th>
+<th>Fence</th>
+<th>MiscFeature</th>
+<th><blockquote>
+<p>\</p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 Lvl</td>
+<td>AllPub ... 120</td>
+<td>0</td>
+<td>NaN</td>
+<td>MnPrv</td>
+<td>NaN</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1 Lvl</td>
+<td>AllPub ... 0</td>
+<td>0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Gar2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2 Lvl</td>
+<td>AllPub ... 0</td>
+<td>0</td>
+<td>NaN</td>
+<td>MnPrv</td>
+<td>NaN</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3 Lvl</td>
+<td>AllPub ... 0</td>
+<td>0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4 HLS</td>
+<td>AllPub ... 144</td>
+<td>0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>MiscVal</th>
+<th>MoSold</th>
+<th>YrSold</th>
+<th>SaleType</th>
+<th>SaleCondition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 0</td>
+<td>6</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="even">
+<td>1 12500</td>
+<td>6</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="odd">
+<td>2 0</td>
+<td>3</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="even">
+<td>3 0</td>
+<td>6</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+<tr class="odd">
+<td>4 0</td>
+<td>1</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[5 rows x 80 columns]</p>
+</blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td>index</td>
+<td>name</td>
+<td>geocode_name</td>
+<td>street</td>
+<td>neighborhood</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1812 Theatre</td>
+<td>1812 Theatre</td>
+<td>Rose Street</td>
+<td>Upper Ferntree Gully</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>ACMI</td>
+<td>ACMI</td>
+<td>Federation Square</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Adelphi Theatre</td>
+<td>Mason Theatre</td>
+<td>14</td>
+<td>Sir Christopher Ondaatje Avenue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Alexander Theatre</td>
+<td>Alexander Theatre (7) (CL48Exh)</td>
+<td>Ancora Imparo Way</td>
+<td>Clayton</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Altona Drive-In</td>
+<td>Altona Drive</td>
+<td>Mandurah</td>
+<td>Australia</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Apollo Theatre</td>
+<td>Steve Brittain Performing Arts and Physical Education</td>
+<td>16 Sharpes Road</td>
+<td>Sharpes Road</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Argosy Theatre</td>
+<td>Meadow Street</td>
+<td>Guildford</td>
+<td>Midland</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>Armadale Theatre</td>
+<td>Cromwell Street Theatre</td>
+<td>Wilson Street</td>
+<td>South Yarra</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>Arts Theatre</td>
+<td>Lingo Lin Performing Arts Theatre</td>
+<td>Sturgeon Street</td>
+<td>Ormiston</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>Ascot Vale Cinema</td>
+<td>Sun Theatre</td>
+<td>8</td>
+<td>Ballarat Street</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Astor Theatre</td>
+<td>Astor Theatre</td>
+<td>Walcott Street</td>
+<td>Highgate</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Athenaeum Hall</td>
+<td>Athenaeum Place</td>
+<td>Willsmere</td>
+<td>Kew</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>Athenaeum Theatre</td>
+<td>Athenaeum Theatre</td>
+<td>Collins Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>Austral Theatre</td>
+<td>Amphitheatre</td>
+<td>Shale Hills Loop</td>
+<td>West Hoxton</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td>Balwyn Cinema Melbourne</td>
+<td>Stop 46: Balwyn Cinema</td>
+<td>Whitehorse Road</td>
+<td>Balwyn</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>Cameo Cinemas Melbourne</td>
+<td>Cameo Belgrave</td>
+<td>Burwood Highway</td>
+<td>Belgrave</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>Cinema Como Melbourne</td>
+<td>Village Cinemas</td>
+<td>500</td>
+<td>Chapel Street</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>52</td>
+<td>Cinema Nova Melbourne</td>
+<td>Cinema Nova</td>
+<td>Cochrane Place</td>
+<td>Carlton</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>53</td>
+<td>Cinema Orient Melbourne</td>
+<td>Village Cinemas</td>
+<td>Overland Drive</td>
+<td>Fountain Gate</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>54</td>
+<td>Cinema le Boulevarde Melbourne</td>
+<td>Village Cinemas</td>
+<td>Williamsons Road</td>
+<td>Doncaster Hill</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>58</td>
+<td>Circle Theatre Melbourne</td>
+<td>Theatre</td>
+<td>28</td>
+<td>Isaac Road</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>Coburg Town Hall Melbourne</td>
+<td>Coburg Town Hall</td>
+<td>Urquhart Street</td>
+<td>Coburg</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>Comedy Theatre Melbourne</td>
+<td>Comedy Theatre</td>
+<td>Lonsdale Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td>Grand Theatre Melbourne</td>
+<td>Theatre</td>
+<td>28</td>
+<td>Isaac Road</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>106</td>
+<td>Hoyts Broadmeadows Melbourne</td>
+<td>Hoyts Cinema</td>
+<td>Pearcedale Parade</td>
+<td>Broadmeadows</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>112</td>
+<td>Hoyts Cinema Centre Melbourne</td>
+<td>140 Bourke</td>
+<td>140</td>
+<td>Bourke Street</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>118</td>
+<td>Hoyts Forest Hill 6 Melbourne</td>
+<td>Hoyts</td>
+<td>270</td>
+<td>Canterbury Road</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>119</td>
+<td>Hoyts Frankston Melbourne</td>
+<td>Hoyts Cinema</td>
+<td>Wells Street</td>
+<td>Frankston</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>122</td>
+<td>Hoyts Greensborough Melbourne</td>
+<td>Hoyts Cinema</td>
+<td>Church Street</td>
+<td>Apollo Parkways</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>127</td>
+<td>Hoyts Melbourne Central Melbourne</td>
+<td>Hoyts Melbourne Central</td>
+<td>Queen Elizabeth Walk</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>140</td>
+<td>Hoyts Richmond Cinema Melbourne</td>
+<td>Hoyts Victoria Gardens</td>
+<td>David Street</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>146</td>
+<td>Hoyts Victoria Gardens Melbourne</td>
+<td>Hoyts Victoria Gardens</td>
+<td>David Street</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>index</td>
+<td>name</td>
+<td>geocode_name</td>
+<td>street</td>
+<td>neighborhood</td>
+<td>city</td>
+<td>county</td>
+<td>lng</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Churchill National Park</td>
+<td>Churchill National Park</td>
+<td>Stonemasons Track</td>
+<td>Lysterfield South</td>
+<td></td>
+<td></td>
+<td>145.2615914</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>You Yangs Regional Park</td>
+<td>You Yangs Regional Park</td>
+<td>West Track</td>
+<td>Little River</td>
+<td></td>
+<td></td>
+<td>144.4160884</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Albert Park</td>
+<td>Albert Park</td>
+<td>Canterbury Place</td>
+<td>Middle Park</td>
+<td></td>
+<td></td>
+<td>144.9620409</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Dandenong Ranges National Park</td>
+<td>Dandenong Ranges National Park</td>
+<td>Old Coach Road</td>
+<td>Mount Dandenong</td>
+<td></td>
+<td></td>
+<td>145.35846</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Warrandyte State Park</td>
+<td>Warrandyte State Park</td>
+<td>Parkside Court</td>
+<td>Warrandyte Bridge</td>
+<td></td>
+<td></td>
+<td>145.2275017</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>Batman Park</td>
+<td>Batman Park</td>
+<td>Melbourne</td>
+<td>City of Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9564064</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Point Nepean National Park</td>
+<td>Point Nepean National Park</td>
+<td>Butlers Track</td>
+<td>Portsea</td>
+<td></td>
+<td></td>
+<td>144.6856017</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Jells Park</td>
+<td>Jells Park</td>
+<td>Wheelers Hill</td>
+<td>City of Monash</td>
+<td></td>
+<td></td>
+<td>145.2012927</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Victoria Park</td>
+<td>Victoria Park</td>
+<td>Adelaide</td>
+<td>City of Adelaide</td>
+<td></td>
+<td></td>
+<td>138.6207513</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Flagstaff Gardens</td>
+<td>Flagstaff Gardens</td>
+<td>West Melbourne</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9546075</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Royal Park</td>
+<td>Royal Park</td>
+<td>Adelaide</td>
+<td>South Australia</td>
+<td></td>
+<td></td>
+<td>138.506709</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Queens Park</td>
+<td>Queens Park</td>
+<td>Perth</td>
+<td>Western Australia</td>
+<td></td>
+<td></td>
+<td>115.9521192</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>Churchill National Park</td>
+<td>Churchill National Park</td>
+<td>Stonemasons Track</td>
+<td>Lysterfield South</td>
+<td></td>
+<td></td>
+<td>145.2615914</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td>You Yangs Regional Park</td>
+<td>You Yangs Regional Park</td>
+<td>West Track</td>
+<td>Little River</td>
+<td></td>
+<td></td>
+<td>144.4160884</td>
+</tr>
+<tr class="odd">
+<td>24</td>
+<td>Albert Park</td>
+<td>Albert Park</td>
+<td>Canterbury Place</td>
+<td>Middle Park</td>
+<td></td>
+<td></td>
+<td>144.9620409</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>Dandenong Ranges National Park</td>
+<td>Dandenong Ranges National Park</td>
+<td>Old Coach Road</td>
+<td>Mount Dandenong</td>
+<td></td>
+<td></td>
+<td>145.35846</td>
+</tr>
+<tr class="odd">
+<td>27</td>
+<td>Warrandyte State Park</td>
+<td>Warrandyte State Park</td>
+<td>Parkside Court</td>
+<td>Warrandyte Bridge</td>
+<td></td>
+<td></td>
+<td>145.2275017</td>
+</tr>
+<tr class="even">
+<td>29</td>
+<td>Batman Park</td>
+<td>Batman Park</td>
+<td>Melbourne</td>
+<td>City of Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9564064</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>Point Nepean National Park</td>
+<td>Point Nepean National Park</td>
+<td>Butlers Track</td>
+<td>Portsea</td>
+<td></td>
+<td></td>
+<td>144.6856017</td>
+</tr>
+<tr class="even">
+<td>32</td>
+<td>Jells Park</td>
+<td>Jells Park</td>
+<td>Wheelers Hill</td>
+<td>City of Monash</td>
+<td></td>
+<td></td>
+<td>145.2012927</td>
+</tr>
+<tr class="odd">
+<td>35</td>
+<td>Victoria Park</td>
+<td>Victoria Park</td>
+<td>Adelaide</td>
+<td>City of Adelaide</td>
+<td></td>
+<td></td>
+<td>138.6207513</td>
+</tr>
+<tr class="even">
+<td>37</td>
+<td>Flagstaff Gardens</td>
+<td>Flagstaff Gardens</td>
+<td>West Melbourne</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9546075</td>
+</tr>
+<tr class="odd">
+<td>38</td>
+<td>Royal Park</td>
+<td>Royal Park</td>
+<td>Adelaide</td>
+<td>South Australia</td>
+<td></td>
+<td></td>
+<td>138.506709</td>
+</tr>
+<tr class="even">
+<td>39</td>
+<td>Queens Park</td>
+<td>Queens Park</td>
+<td>Perth</td>
+<td>Western Australia</td>
+<td></td>
+<td></td>
+<td>115.9521192</td>
+</tr>
+<tr class="odd">
+<td>42</td>
+<td>Churchill National Park</td>
+<td>Churchill National Park</td>
+<td>Stonemasons Track</td>
+<td>Lysterfield South</td>
+<td></td>
+<td></td>
+<td>145.2615914</td>
+</tr>
+<tr class="even">
+<td>43</td>
+<td>You Yangs Regional Park</td>
+<td>You Yangs Regional Park</td>
+<td>West Track</td>
+<td>Little River</td>
+<td></td>
+<td></td>
+<td>144.4160884</td>
+</tr>
+<tr class="odd">
+<td>44</td>
+<td>Albert Park</td>
+<td>Albert Park</td>
+<td>Canterbury Place</td>
+<td>Middle Park</td>
+<td></td>
+<td></td>
+<td>144.9620409</td>
+</tr>
+<tr class="even">
+<td>45</td>
+<td>Dandenong Ranges National Park</td>
+<td>Dandenong Ranges National Park</td>
+<td>Old Coach Road</td>
+<td>Mount Dandenong</td>
+<td></td>
+<td></td>
+<td>145.35846</td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>Warrandyte State Park</td>
+<td>Warrandyte State Park</td>
+<td>Parkside Court</td>
+<td>Warrandyte Bridge</td>
+<td></td>
+<td></td>
+<td>145.2275017</td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>Batman Park</td>
+<td>Batman Park</td>
+<td>Melbourne</td>
+<td>City of Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9564064</td>
+</tr>
+<tr class="odd">
+<td>51</td>
+<td>Point Nepean National Park</td>
+<td>Point Nepean National Park</td>
+<td>Butlers Track</td>
+<td>Portsea</td>
+<td></td>
+<td></td>
+<td>144.6856017</td>
+</tr>
+<tr class="even">
+<td>52</td>
+<td>Jells Park</td>
+<td>Jells Park</td>
+<td>Wheelers Hill</td>
+<td>City of Monash</td>
+<td></td>
+<td></td>
+<td>145.2012927</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>Victoria Park</td>
+<td>Victoria Park</td>
+<td>Adelaide</td>
+<td>City of Adelaide</td>
+<td></td>
+<td></td>
+<td>138.6207513</td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>Flagstaff Gardens</td>
+<td>Flagstaff Gardens</td>
+<td>West Melbourne</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9546075</td>
+</tr>
+<tr class="odd">
+<td>58</td>
+<td>Royal Park</td>
+<td>Royal Park</td>
+<td>Adelaide</td>
+<td>South Australia</td>
+<td></td>
+<td></td>
+<td>138.506709</td>
+</tr>
+<tr class="even">
+<td>59</td>
+<td>Queens Park</td>
+<td>Queens Park</td>
+<td>Perth</td>
+<td>Western Australia</td>
+<td></td>
+<td></td>
+<td>115.9521192</td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>Churchill National Park</td>
+<td>Churchill National Park</td>
+<td>Stonemasons Track</td>
+<td>Lysterfield South</td>
+<td></td>
+<td></td>
+<td>145.2615914</td>
+</tr>
+<tr class="even">
+<td>63</td>
+<td>You Yangs Regional Park</td>
+<td>You Yangs Regional Park</td>
+<td>West Track</td>
+<td>Little River</td>
+<td></td>
+<td></td>
+<td>144.4160884</td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>Albert Park</td>
+<td>Albert Park</td>
+<td>Canterbury Place</td>
+<td>Middle Park</td>
+<td></td>
+<td></td>
+<td>144.9620409</td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>Dandenong Ranges National Park</td>
+<td>Dandenong Ranges National Park</td>
+<td>Old Coach Road</td>
+<td>Mount Dandenong</td>
+<td></td>
+<td></td>
+<td>145.35846</td>
+</tr>
+<tr class="odd">
+<td>67</td>
+<td>Warrandyte State Park</td>
+<td>Warrandyte State Park</td>
+<td>Parkside Court</td>
+<td>Warrandyte Bridge</td>
+<td></td>
+<td></td>
+<td>145.2275017</td>
+</tr>
+<tr class="even">
+<td>69</td>
+<td>Batman Park</td>
+<td>Batman Park</td>
+<td>Melbourne</td>
+<td>City of Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9564064</td>
+</tr>
+<tr class="odd">
+<td>71</td>
+<td>Point Nepean National Park</td>
+<td>Point Nepean National Park</td>
+<td>Butlers Track</td>
+<td>Portsea</td>
+<td></td>
+<td></td>
+<td>144.6856017</td>
+</tr>
+<tr class="even">
+<td>72</td>
+<td>Jells Park</td>
+<td>Jells Park</td>
+<td>Wheelers Hill</td>
+<td>City of Monash</td>
+<td></td>
+<td></td>
+<td>145.2012927</td>
+</tr>
+<tr class="odd">
+<td>75</td>
+<td>Victoria Park</td>
+<td>Victoria Park</td>
+<td>Adelaide</td>
+<td>City of Adelaide</td>
+<td></td>
+<td></td>
+<td>138.6207513</td>
+</tr>
+<tr class="even">
+<td>77</td>
+<td>Flagstaff Gardens</td>
+<td>Flagstaff Gardens</td>
+<td>West Melbourne</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9546075</td>
+</tr>
+<tr class="odd">
+<td>78</td>
+<td>Royal Park</td>
+<td>Royal Park</td>
+<td>Adelaide</td>
+<td>South Australia</td>
+<td></td>
+<td></td>
+<td>138.506709</td>
+</tr>
+<tr class="even">
+<td>79</td>
+<td>Queens Park</td>
+<td>Queens Park</td>
+<td>Perth</td>
+<td>Western Australia</td>
+<td></td>
+<td></td>
+<td>115.9521192</td>
+</tr>
+<tr class="odd">
+<td>82</td>
+<td>Churchill National Park</td>
+<td>Churchill National Park</td>
+<td>Stonemasons Track</td>
+<td>Lysterfield South</td>
+<td></td>
+<td></td>
+<td>145.2615914</td>
+</tr>
+<tr class="even">
+<td>83</td>
+<td>You Yangs Regional Park</td>
+<td>You Yangs Regional Park</td>
+<td>West Track</td>
+<td>Little River</td>
+<td></td>
+<td></td>
+<td>144.4160884</td>
+</tr>
+<tr class="odd">
+<td>84</td>
+<td>Albert Park</td>
+<td>Albert Park</td>
+<td>Canterbury Place</td>
+<td>Middle Park</td>
+<td></td>
+<td></td>
+<td>144.9620409</td>
+</tr>
+<tr class="even">
+<td>85</td>
+<td>Dandenong Ranges National Park</td>
+<td>Dandenong Ranges National Park</td>
+<td>Old Coach Road</td>
+<td>Mount Dandenong</td>
+<td></td>
+<td></td>
+<td>145.35846</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>erial)MasVnrType:Masonry veneer type</p>
+<p>SaleCondition: Condition of sale</p>
+<p>In[6]:</p>
+<p>train shape: (1460, 81)</p>
+<p>test shape: (1459, 80)</p>
+</blockquote>
+<p>In[7]:</p>
+<blockquote>
+<p>Combined data shape (2919, 81)</p>
+<p>&lt;class 'pandas.core.frame.DataFrame'&gt;RangeIndex: 2919 entries, 0 to 2918</p>
+<p>Data columns (total 81 columns):</p>
+<p># Column Non-Null Count Dtype</p>
+</blockquote>
+<ol start="0" type="1">
+<li><blockquote>
+<p>Id 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>MSSubClass 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>MSZoning 2915 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>LotFrontage 2433 non-null float64</p>
+</blockquote></li>
+<li><blockquote>
+<p>LotArea 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>Street 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Alley 198 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>LotShape 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>LandContour 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Utilities 2917 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>LotConfig 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>LandSlope 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Neighborhood 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Condition1 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Condition2 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>BldgType 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>HouseStyle 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>OverallQual 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>OverallCond 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>YearBuilt 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>YearRemodAdd 2919 non-null int64</p>
+</blockquote></li>
+<li><blockquote>
+<p>RoofStyle 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>RoofMatl 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Exterior1st 2918 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>Exterior2nd 2918 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>MasVnrType 2895 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>MasVnrArea 2896 non-null float64</p>
+</blockquote></li>
+<li><blockquote>
+<p>ExterQual 2919 non-null object</p>
+</blockquote></li>
+<li><blockquote>
+<p>ExterCond 2919 non-null object</p>
+</blockquote></li>
+</ol>
+<blockquote>
+<p>4</p>
+<p>In[8]:</p>
+<p>Out[8]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Id</strong></th>
+<th><strong>MSSubClass</strong></th>
+<th><blockquote>
+<p><strong>LotFrontage</strong></p>
+</blockquote></th>
+<th><strong>LotArea</strong></th>
+<th><strong>OverallQual</strong></th>
+<th><strong>OverallCond</strong></th>
+<th><strong>YearBuilt</strong></th>
+<th><strong>YearRemodAdd</strong></th>
+<th><strong>MasVnrArea</strong></th>
+<th><strong>Bsm</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>count</strong></td>
+<td>1460.000000</td>
+<td>1460.000000</td>
+<td><blockquote>
+<p>1201.000000</p>
+</blockquote></td>
+<td>1460.000000</td>
+<td>1460.000000</td>
+<td>1460.000000</td>
+<td>1460.000000</td>
+<td>1460.000000</td>
+<td>1452.000000</td>
+<td>1460</td>
+</tr>
+<tr class="even">
+<td><strong>mean</strong></td>
+<td>730.500000</td>
+<td>56.897260</td>
+<td><blockquote>
+<p>70.049958</p>
+</blockquote></td>
+<td>10516.828082</td>
+<td>6.099315</td>
+<td>5.575342</td>
+<td>1971.267808</td>
+<td>1984.865753</td>
+<td>103.685262</td>
+<td>443</td>
+</tr>
+<tr class="odd">
+<td><strong>std</strong></td>
+<td>421.610009</td>
+<td>42.300571</td>
+<td><blockquote>
+<p>24.284752</p>
+</blockquote></td>
+<td>9981.264932</td>
+<td>1.382997</td>
+<td>1.112799</td>
+<td>30.202904</td>
+<td>20.645407</td>
+<td>181.066207</td>
+<td>456</td>
+</tr>
+<tr class="even">
+<td><strong>min</strong></td>
+<td>1.000000</td>
+<td>20.000000</td>
+<td><blockquote>
+<p>21.000000</p>
+</blockquote></td>
+<td>1300.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1872.000000</td>
+<td>1950.000000</td>
+<td>0.000000</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><strong>25%</strong></td>
+<td>365.750000</td>
+<td>20.000000</td>
+<td><blockquote>
+<p>59.000000</p>
+</blockquote></td>
+<td>7553.500000</td>
+<td>5.000000</td>
+<td>5.000000</td>
+<td>1954.000000</td>
+<td>1967.000000</td>
+<td>0.000000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><strong>50%</strong></td>
+<td>730.500000</td>
+<td>50.000000</td>
+<td><blockquote>
+<p>69.000000</p>
+</blockquote></td>
+<td>9478.500000</td>
+<td>6.000000</td>
+<td>5.000000</td>
+<td>1973.000000</td>
+<td>1994.000000</td>
+<td>0.000000</td>
+<td>383</td>
+</tr>
+<tr class="odd">
+<td><strong>75%</strong></td>
+<td>1095.250000</td>
+<td>70.000000</td>
+<td><blockquote>
+<p>80.000000</p>
+</blockquote></td>
+<td>11601.500000</td>
+<td>7.000000</td>
+<td>6.000000</td>
+<td>2000.000000</td>
+<td>2004.000000</td>
+<td>166.000000</td>
+<td>712</td>
+</tr>
+<tr class="even">
+<td><strong>max</strong></td>
+<td>1460.000000</td>
+<td>190.000000</td>
+<td><blockquote>
+<p>313.000000</p>
+</blockquote></td>
+<td>215245.000000</td>
+<td>10.000000</td>
+<td>9.000000</td>
+<td>2010.000000</td>
+<td>2010.000000</td>
+<td>1600.000000</td>
+<td>5644</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>8 rows × 38 columns</p>
+<p>In[9]:</p>
+<p>Out[9]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Id</strong></th>
+<th><strong>MSSubClass</strong></th>
+<th><blockquote>
+<p><strong>LotFrontage</strong></p>
+</blockquote></th>
+<th><strong>LotArea</strong></th>
+<th><strong>OverallQual</strong></th>
+<th><strong>OverallCond</strong></th>
+<th><strong>YearBuilt</strong></th>
+<th><strong>YearRemodAdd</strong></th>
+<th><strong>MasVnrArea</strong></th>
+<th><strong>Bsmt</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>count</strong></td>
+<td>1459.000000</td>
+<td>1459.000000</td>
+<td><blockquote>
+<p>1232.000000</p>
+</blockquote></td>
+<td>1459.000000</td>
+<td>1459.000000</td>
+<td>1459.000000</td>
+<td>1459.000000</td>
+<td>1459.000000</td>
+<td>1444.000000</td>
+<td>1458.</td>
+</tr>
+<tr class="even">
+<td><strong>mean</strong></td>
+<td>2190.000000</td>
+<td>57.378341</td>
+<td><blockquote>
+<p>68.580357</p>
+</blockquote></td>
+<td>9819.161069</td>
+<td>6.078821</td>
+<td>5.553804</td>
+<td>1971.357779</td>
+<td>1983.662783</td>
+<td>100.709141</td>
+<td>439.</td>
+</tr>
+<tr class="odd">
+<td><strong>std</strong></td>
+<td>421.321334</td>
+<td>42.746880</td>
+<td><blockquote>
+<p>22.376841</p>
+</blockquote></td>
+<td>4955.517327</td>
+<td>1.436812</td>
+<td>1.113740</td>
+<td>30.390071</td>
+<td>21.130467</td>
+<td>177.625900</td>
+<td>455.</td>
+</tr>
+<tr class="even">
+<td><strong>min</strong></td>
+<td>1461.000000</td>
+<td>20.000000</td>
+<td><blockquote>
+<p>21.000000</p>
+</blockquote></td>
+<td>1470.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1879.000000</td>
+<td>1950.000000</td>
+<td>0.000000</td>
+<td>0.</td>
+</tr>
+<tr class="odd">
+<td><strong>25%</strong></td>
+<td>1825.500000</td>
+<td>20.000000</td>
+<td><blockquote>
+<p>58.000000</p>
+</blockquote></td>
+<td>7391.000000</td>
+<td>5.000000</td>
+<td>5.000000</td>
+<td>1953.000000</td>
+<td>1963.000000</td>
+<td>0.000000</td>
+<td>0.</td>
+</tr>
+<tr class="even">
+<td><strong>50%</strong></td>
+<td>2190.000000</td>
+<td>50.000000</td>
+<td><blockquote>
+<p>67.000000</p>
+</blockquote></td>
+<td>9399.000000</td>
+<td>6.000000</td>
+<td>5.000000</td>
+<td>1973.000000</td>
+<td>1992.000000</td>
+<td>0.000000</td>
+<td>350.</td>
+</tr>
+<tr class="odd">
+<td><strong>75%</strong></td>
+<td>2554.500000</td>
+<td>70.000000</td>
+<td><blockquote>
+<p>80.000000</p>
+</blockquote></td>
+<td>11517.500000</td>
+<td>7.000000</td>
+<td>6.000000</td>
+<td>2001.000000</td>
+<td>2004.000000</td>
+<td>164.000000</td>
+<td>753.</td>
+</tr>
+<tr class="even">
+<td><strong>max</strong></td>
+<td>2919.000000</td>
+<td>190.000000</td>
+<td><blockquote>
+<p>200.000000</p>
+</blockquote></td>
+<td>56600.000000</td>
+<td>10.000000</td>
+<td>9.000000</td>
+<td>2010.000000</td>
+<td>2010.000000</td>
+<td>1290.000000</td>
+<td>4010.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>8 rows × 37 columns</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><blockquote>
+<p>In[10]:</p>
+</blockquote></th>
+<th><blockquote>
+<p>df.isnull().sum()</p>
+</blockquote></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><blockquote>
+<p>Out[10]:</p>
+</blockquote></td>
+<td><blockquote>
+<p>Id</p>
+</blockquote></td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><blockquote>
+<p>MSSubClass</p>
+</blockquote></td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><blockquote>
+<p>MSZoning</p>
+</blockquote></td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><blockquote>
+<p>LotFrontage</p>
+</blockquote></td>
+<td>486</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><blockquote>
+<p>LotArea</p>
+</blockquote></td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><blockquote>
+<p>...</p>
+</blockquote></td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p>MoSold</p>
+</blockquote></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p>YrSold</p>
+</blockquote></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p>SaleType</p>
+</blockquote></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p>SaleCondition</p>
+</blockquote></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p>SalePrice</p>
+</blockquote></td>
+<td><blockquote>
+<p>1459</p>
+</blockquote></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Length: 81, dtype: int64</p>
+<p>In[11]:</p>
+<p>Out[11]:&lt;AxesSubplot:&gt;</p>
+<p>In[16]:</p>
+<p>Out[16]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><blockquote>
+<p><strong>Street</strong></p>
+</blockquote></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><strong>Utilities</strong></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... EnclosedPorch</strong></th>
+<th><blockquote>
+<p><strong>3S</strong></p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong> 60</td>
+<td>RL</td>
+<td>65.0</td>
+<td>8450</td>
+<td><blockquote>
+<p>Parking</p>
+</blockquote></td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>1</strong> 20</td>
+<td>RL</td>
+<td>80.0</td>
+<td>9600</td>
+<td><blockquote>
+<p>Shopping</p>
+</blockquote></td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl ... 0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>2</strong> 60</td>
+<td>RL</td>
+<td>68.0</td>
+<td>11250</td>
+<td><blockquote>
+<p>Shorping centre</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>3</strong> 70</td>
+<td>RL</td>
+<td>60.0</td>
+<td>9550</td>
+<td><blockquote>
+<p>Road</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl ... 272</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong> 60</td>
+<td>RL</td>
+<td>84.0</td>
+<td>14260</td>
+<td><blockquote>
+<p>Parkings</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl ... 0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>5 rows × 75 columns</p>
+<p>In[17]:</p>
+<p>In[18]:</p>
+<p>In[19]:</p>
+<p>Out[19]:&lt;AxesSubplot:&gt;</p>
+</blockquote>
+<p>In[20]:</p>
+<blockquote>
+<p>In[21]:</p>
+<p>Out[21]:&lt;AxesSubplot:&gt;</p>
+<p>In[22]:</p>
+</blockquote>
+<p>In[25]:</p>
+<blockquote>
+<p>Out[25]:&lt;AxesSubplot:&gt;</p>
+<p>In[26]:</p>
+<p>Out[26]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><strong>Street</strong></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><strong>Utilities</strong></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... EnclosedPorch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong></td>
+<td>60</td>
+<td>RL</td>
+<td>65.0</td>
+<td>8450</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>1</strong></td>
+<td>20</td>
+<td>RL</td>
+<td>80.0</td>
+<td>9600</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><strong>2</strong></td>
+<td>60</td>
+<td>RL</td>
+<td>68.0</td>
+<td>11250</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>3</strong></td>
+<td>70</td>
+<td>RL</td>
+<td>60.0</td>
+<td>9550</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl ... 272</td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong></td>
+<td>60</td>
+<td>RL</td>
+<td>84.0</td>
+<td>14260</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>...</strong></td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>... ... ...</td>
+</tr>
+<tr class="odd">
+<td><strong>2914</strong></td>
+<td>160</td>
+<td>RM</td>
+<td>21.0</td>
+<td>1936</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>2915</strong></td>
+<td>160</td>
+<td>RM</td>
+<td>21.0</td>
+<td>1894</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><strong>2916</strong></td>
+<td>20</td>
+<td>RL</td>
+<td>160.0</td>
+<td>20000</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>2917</strong></td>
+<td>85</td>
+<td>RL</td>
+<td>62.0</td>
+<td>10441</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><strong>2918</strong></td>
+<td>60</td>
+<td>RL</td>
+<td>74.0</td>
+<td>9627</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Mod ... 0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>2919 rows × 75 columns</p>
+</blockquote>
+<h1 id="recognisingoutliers">RecognisingOutliers</h1>
+<blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image1.png" />In[27]:</p>
+<p>From the observations above we understand</p>
+<p>LotAreaforafewisvastinsizebutitscostingsismuchless,thereasonofthiscouldbeunfavourableland,weather,crimesetc.Mostsalesdepends onthearea ofits firstfloor,and secondfloor butmosthouses areobserved tonota secondfloor.</p>
+<p>Wesee 2 outliers in Ground living areawhere the costing it too low forits ground area, the same reason oflot area can be used here</p>
+<p>In[28]:</p>
+<p>Out[28]:&lt;AxesSubplot:xlabel='GrLivArea', ylabel='SalePrice'&gt;</p>
+</blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image4.png" style="width:4.23958in;height:2.77083in" /></p>
+<blockquote>
+<p>The two values with bigger 'GrLivArea' seem strange and they are not following the crowd. We can speculate why this is happening.Maybe they refer to agricultural area and that could explain the low price. I'm not sure about this but I'm quite confident that these twopoints are not representative of the typical case. Therefore, we'll define them as outliers and delete them.</p>
+<p>In[29]:</p>
+<p>In[30]:</p>
+<p>Out[30]:SalePrice 1459</p>
+<p>MasVnrArea 23</p>
+<p>BsmtFullBath 2</p>
+<p>BsmtHalfBath 2</p>
+<p>BsmtFinSF1 1</p>
+<p>BsmtFinSF2 1</p>
+<p>BsmtUnfSF 1</p>
+<p>TotalBsmtSF 1</p>
+<p>GarageCars 1</p>
+<p>GarageArea 1</p>
+<p>dtype: int64</p>
+<p>In[31]:</p>
+<p>Out[31]:(2917, 75)</p>
+<p><strong>SplittingTestandTrain</strong></p>
+<p>In[32]:</p>
+<p>In[33]:</p>
+<p>Out[33]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><blockquote>
+<p><strong>Street</strong></p>
+</blockquote></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><strong>Utilities</strong></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope</strong></th>
+<th><blockquote>
+<p><strong>... EnclosedPorch 3S</strong></p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong> 60</td>
+<td>RL</td>
+<td>65.0</td>
+<td>8450</td>
+<td><blockquote>
+<p>Pave</p>
+</blockquote></td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl</td>
+<td><blockquote>
+<p>... 0</p>
+</blockquote></td>
+</tr>
+<tr class="even">
+<td><strong>1</strong> 20</td>
+<td>RL</td>
+<td>80.0</td>
+<td>9600</td>
+<td><blockquote>
+<p>Pave</p>
+</blockquote></td>
+<td>Reg</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl</td>
+<td><blockquote>
+<p>... 0</p>
+</blockquote></td>
+</tr>
+<tr class="odd">
+<td><strong>2</strong> 60</td>
+<td>RL</td>
+<td>68.0</td>
+<td>11250</td>
+<td><blockquote>
+<p>Pave</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl</td>
+<td><blockquote>
+<p>... 0</p>
+</blockquote></td>
+</tr>
+<tr class="even">
+<td><strong>3</strong> 70</td>
+<td>RL</td>
+<td>60.0</td>
+<td>9550</td>
+<td><blockquote>
+<p>Pave</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl</td>
+<td><blockquote>
+<p>... 272</p>
+</blockquote></td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong> 60</td>
+<td>RL</td>
+<td>84.0</td>
+<td>14260</td>
+<td><blockquote>
+<p>Pave</p>
+</blockquote></td>
+<td>IR1</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>FR2</td>
+<td>Gtl</td>
+<td><blockquote>
+<p>... 0</p>
+</blockquote></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>5 rows × 75 columns</p>
+<p>In[34]:</p>
+<p>Out[34]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><strong>Street</strong></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><blockquote>
+<p><strong>Utilities</strong></p>
+</blockquote></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... EnclosedPorch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1460</strong></p>
+</blockquote></td>
+<td>20</td>
+<td>RH</td>
+<td>80.0</td>
+<td>11622</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p><strong>1461</strong></p>
+</blockquote></td>
+<td>20</td>
+<td>RL</td>
+<td>81.0</td>
+<td>14267</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Corner</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1462</strong></p>
+</blockquote></td>
+<td>60</td>
+<td>RL</td>
+<td>74.0</td>
+<td>13830</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p><strong>1463</strong></p>
+</blockquote></td>
+<td>60</td>
+<td>RL</td>
+<td>78.0</td>
+<td>9978</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1464</strong></p>
+</blockquote></td>
+<td>120</td>
+<td>RL</td>
+<td>43.0</td>
+<td>5005</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>HLS</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>5 rows × 75 columns</p>
+</blockquote>
+<h1 id="datavisualisation">DataVisualisation</h1>
+<blockquote>
+<p>In[35]:</p>
+<p>Out[35]:&lt;AxesSubplot:&gt;</p>
+</blockquote>
+<p>In[36]:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>index</td>
+<td>name</td>
+<td>geocode_name</td>
+<td>street</td>
+<td>neighborhood</td>
+<td>city</td>
+<td>county</td>
+<td>lng</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>IKEA Pickup</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td>145.0107759</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Melbourne Central</td>
+<td>Melbourne Central</td>
+<td>La Trobe Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9625944</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Highpoint Shopping Centre</td>
+<td>Highpoint Shopping Centre</td>
+<td>120-200</td>
+<td>Rosamond Road</td>
+<td></td>
+<td></td>
+<td>144.888802</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Drive</td>
+<td>Ferntree Gully</td>
+<td></td>
+<td></td>
+<td>145.2757407</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Bourke Street Mall</td>
+<td>Bourke Street Mall</td>
+<td>Centrepoint</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9652982</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Northland Shopping Centre</td>
+<td>Northland Shopping Centre</td>
+<td>Hannah Street</td>
+<td>Preston</td>
+<td></td>
+<td></td>
+<td>145.0299296</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>Box Hill Central</td>
+<td>Box Hill Central (South Precinct)</td>
+<td>Carrington Road</td>
+<td>Box Hill</td>
+<td></td>
+<td></td>
+<td>145.1211564</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>North Circular Road</td>
+<td>Gladstone Park</td>
+<td></td>
+<td></td>
+<td>144.8850525</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Brimbank Shopping Centre</td>
+<td>Brimbank Central Shopping Centre</td>
+<td>Neale Road</td>
+<td>Deer Park</td>
+<td></td>
+<td></td>
+<td>144.7750742</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Jamieson Way</td>
+<td>Point Cook</td>
+<td></td>
+<td></td>
+<td>144.7522644</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Maroondah Highway</td>
+<td>Chirnside Park</td>
+<td></td>
+<td></td>
+<td>145.312461</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Westfield Fountain Gate</td>
+<td>Westfield Fountain Gate Shopping Centre</td>
+<td>Overland Drive</td>
+<td>Fountain Gate</td>
+<td></td>
+<td></td>
+<td>145.3041576</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Sayers Road</td>
+<td>Duck Haven</td>
+<td></td>
+<td></td>
+<td>144.7048327</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Vermont South Shopping Centre</td>
+<td>Vermont South Shopping Centre</td>
+<td>Hanvover Road</td>
+<td>Vermont South</td>
+<td></td>
+<td></td>
+<td>145.1828554</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Broadmeadows Central</td>
+<td>Broadmeadows</td>
+<td>Terang Street</td>
+<td>Dallas</td>
+<td></td>
+<td></td>
+<td>144.9401593</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>IKEA Pickup</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td>145.0107759</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>Melbourne Central</td>
+<td>Melbourne Central</td>
+<td>La Trobe Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9625944</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>Highpoint Shopping Centre</td>
+<td>Highpoint Shopping Centre</td>
+<td>120-200</td>
+<td>Rosamond Road</td>
+<td></td>
+<td></td>
+<td>144.888802</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Drive</td>
+<td>Ferntree Gully</td>
+<td></td>
+<td></td>
+<td>145.2757407</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>Bourke Street Mall</td>
+<td>Bourke Street Mall</td>
+<td>Centrepoint</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9652982</td>
+</tr>
+<tr class="even">
+<td>27</td>
+<td>Northland Shopping Centre</td>
+<td>Northland Shopping Centre</td>
+<td>Hannah Street</td>
+<td>Preston</td>
+<td></td>
+<td></td>
+<td>145.0299296</td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>Box Hill Central</td>
+<td>Box Hill Central (South Precinct)</td>
+<td>Carrington Road</td>
+<td>Box Hill</td>
+<td></td>
+<td></td>
+<td>145.1211564</td>
+</tr>
+<tr class="even">
+<td>30</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>North Circular Road</td>
+<td>Gladstone Park</td>
+<td></td>
+<td></td>
+<td>144.8850525</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>Brimbank Shopping Centre</td>
+<td>Brimbank Central Shopping Centre</td>
+<td>Neale Road</td>
+<td>Deer Park</td>
+<td></td>
+<td></td>
+<td>144.7750742</td>
+</tr>
+<tr class="even">
+<td>33</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Jamieson Way</td>
+<td>Point Cook</td>
+<td></td>
+<td></td>
+<td>144.7522644</td>
+</tr>
+<tr class="odd">
+<td>34</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Maroondah Highway</td>
+<td>Chirnside Park</td>
+<td></td>
+<td></td>
+<td>145.312461</td>
+</tr>
+<tr class="even">
+<td>35</td>
+<td>Westfield Fountain Gate</td>
+<td>Westfield Fountain Gate Shopping Centre</td>
+<td>Overland Drive</td>
+<td>Fountain Gate</td>
+<td></td>
+<td></td>
+<td>145.3041576</td>
+</tr>
+<tr class="odd">
+<td>36</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Sayers Road</td>
+<td>Duck Haven</td>
+<td></td>
+<td></td>
+<td>144.7048327</td>
+</tr>
+<tr class="even">
+<td>37</td>
+<td>Vermont South Shopping Centre</td>
+<td>Vermont South Shopping Centre</td>
+<td>Hanvover Road</td>
+<td>Vermont South</td>
+<td></td>
+<td></td>
+<td>145.1828554</td>
+</tr>
+<tr class="odd">
+<td>38</td>
+<td>Broadmeadows Central</td>
+<td>Broadmeadows</td>
+<td>Terang Street</td>
+<td>Dallas</td>
+<td></td>
+<td></td>
+<td>144.9401593</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>IKEA Pickup</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td>145.0107759</td>
+</tr>
+<tr class="odd">
+<td>41</td>
+<td>Melbourne Central</td>
+<td>Melbourne Central</td>
+<td>La Trobe Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9625944</td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>Highpoint Shopping Centre</td>
+<td>Highpoint Shopping Centre</td>
+<td>120-200</td>
+<td>Rosamond Road</td>
+<td></td>
+<td></td>
+<td>144.888802</td>
+</tr>
+<tr class="odd">
+<td>44</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Shopping Centre</td>
+<td>Mountain Gate Drive</td>
+<td>Ferntree Gully</td>
+<td></td>
+<td></td>
+<td>145.2757407</td>
+</tr>
+<tr class="even">
+<td>45</td>
+<td>Bourke Street Mall</td>
+<td>Bourke Street Mall</td>
+<td>Centrepoint</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9652982</td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>Northland Shopping Centre</td>
+<td>Northland Shopping Centre</td>
+<td>Hannah Street</td>
+<td>Preston</td>
+<td></td>
+<td></td>
+<td>145.0299296</td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>Box Hill Central</td>
+<td>Box Hill Central (South Precinct)</td>
+<td>Carrington Road</td>
+<td>Box Hill</td>
+<td></td>
+<td></td>
+<td>145.1211564</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>Gladstone Park Shopping Centre</td>
+<td>North Circular Road</td>
+<td>Gladstone Park</td>
+<td></td>
+<td></td>
+<td>144.8850525</td>
+</tr>
+<tr class="even">
+<td>51</td>
+<td>Brimbank Shopping Centre</td>
+<td>Brimbank Central Shopping Centre</td>
+<td>Neale Road</td>
+<td>Deer Park</td>
+<td></td>
+<td></td>
+<td>144.7750742</td>
+</tr>
+<tr class="odd">
+<td>53</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Sanctuary Lakes Shopping Centre</td>
+<td>Jamieson Way</td>
+<td>Point Cook</td>
+<td></td>
+<td></td>
+<td>144.7522644</td>
+</tr>
+<tr class="even">
+<td>54</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Chirnside Park Shopping Centre</td>
+<td>Maroondah Highway</td>
+<td>Chirnside Park</td>
+<td></td>
+<td></td>
+<td>145.312461</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>Westfield Fountain Gate</td>
+<td>Westfield Fountain Gate Shopping Centre</td>
+<td>Overland Drive</td>
+<td>Fountain Gate</td>
+<td></td>
+<td></td>
+<td>145.3041576</td>
+</tr>
+<tr class="even">
+<td>56</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Wyndham Village Shopping Centre</td>
+<td>Sayers Road</td>
+<td>Duck Haven</td>
+<td></td>
+<td></td>
+<td>144.7048327</td>
+</tr>
+<tr class="odd">
+<td>57</td>
+<td>Vermont South Shopping Centre</td>
+<td>Vermont South Shopping Centre</td>
+<td>Hanvover Road</td>
+<td>Vermont South</td>
+<td></td>
+<td></td>
+<td>145.1828554</td>
+</tr>
+<tr class="even">
+<td>58</td>
+<td>Broadmeadows Central</td>
+<td>Broadmeadows</td>
+<td>Terang Street</td>
+<td>Dallas</td>
+<td></td>
+<td></td>
+<td>144.9401593</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>Victoria Gardens Shopping Centre</td>
+<td>IKEA Pickup</td>
+<td>Richmond</td>
+<td></td>
+<td></td>
+<td>145.0107759</td>
+</tr>
+<tr class="even">
+<td>61</td>
+<td>Melbourne Central</td>
+<td>Melbourne Central</td>
+<td>La Trobe Street</td>
+<td>Melbourne</td>
+<td></td>
+<td></td>
+<td>144.9625944</td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>Highpoint Shopping Centre</td>
+<td>Highpoint Shopping Centre</td>
+<td>120-200</td>
+<td>Rosamond Road</td>
+<td></td>
+<td></td>
+<td>144.888802</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>In[37]:</p>
+</blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image2.jpeg" style="width:7.46625in;height:6.55875in" /></p>
+<blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image3.jpeg" style="width:7.44717in;height:0.96937in" /></p>
+<p>In[38]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><blockquote>
+<p>Skewness</p>
+</blockquote></th>
+<th><blockquote>
+<p>is :</p>
+</blockquote></th>
+<th><blockquote>
+<p>1.567321</p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><blockquote>
+<p>Kurtosis</p>
+</blockquote></td>
+<td><blockquote>
+<p>is :</p>
+</blockquote></td>
+<td><blockquote>
+<p>3.894915</p>
+</blockquote></td>
+</tr>
+</tbody>
+</table>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image5.png" style="width:3.98958in;height:2.72917in" /></p>
+<blockquote>
+<p>From the pyplot we can clearly understand the following relations</p>
+<p>Sales Price and Ground Living Area are directly proportionate that means, the larger the area of the living room more the costing ofthe house.</p>
+<p>ThesteepslopeagainstsalespriceandTotalBasementinSquareFeet,thatacertainBasementareaispreferredthusitscostingisthe most</p>
+<p>GroundLivingareashowsadirectproportionwithTotalBasementinsquarefeet,thusindicatingthatusuallybiggerareahomeshavebigger basements</p>
+<p>In[39]:</p>
+<p>Usually 5-9 have similar Price Ranges. This thus inidicates that a lot of people do not consider the total rooms when looking at house saleprice</p>
+<p>In[40]:</p>
+<p>Out[40]:&lt;AxesSubplot:xlabel='YearBuilt', ylabel='SalePrice'&gt;</p>
+</blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image4.jpeg" style="width:8.66716in;height:4.21604in" /></p>
+<blockquote>
+<p>In[41]:</p>
+<p>Out[41]:&lt;seaborn.axisgrid.FacetGrid at 0x7f8370f58b50&gt;</p>
+</blockquote>
+<p><img src="vertopal_c3e8373af60b498280526f19b4f49ce0/media/image5.jpeg" style="width:3.63in;height:3.58875in" /></p>
+<blockquote>
+<p>In[42]:</p>
+<p>In[43]:</p>
+<p>In[44]:</p>
+<p>In[46]:</p>
+<p>outer range (low) of the distribution:[[-1.89560696]</p>
+<p>[-1.8902428 ]</p>
+<p>[-1.85645247]</p>
+<p>[-1.83818037]</p>
+<p>[-1.82904432]</p>
+<p>[-1.67242635]</p>
+<p>[-1.6659006 ]</p>
+<p>[-1.63327185]</p>
+<p>[-1.63327185]</p>
+<p>[-1.62031172]]</p>
+<p>outer range (high) of the distribution:[[3.73741957]</p>
+<p>[3.84835731]</p>
+<p>[3.97887229]</p>
+<p>[4.19862036]</p>
+<p>[4.67060168]</p>
+<p>[4.89247715]</p>
+<p>[4.91311156]</p>
+<p>[5.25704464]</p>
+<p>[5.63193587]</p>
+<p>[5.80608201]]</p>
+</blockquote>
+<ol type="1">
+<li><blockquote>
+<p>the low or the negative values are close to zero so that means they might be within the range of distribution</p>
+</blockquote></li>
+<li><blockquote>
+<p>The necessary outliers are already removed so leaving these values untouched</p>
+</blockquote></li>
+</ol>
+<h1 id="modeling">Modeling</h1>
+<blockquote>
+<p>In[47]:</p>
+<p>In[48]:</p>
+<p>In[49]:</p>
+<p>Out[49]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><strong>Street</strong></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><strong>Utilities</strong></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... OpenPorchSF</strong></th>
+<th><blockquote>
+<p><strong>Enc</strong></p>
+</blockquote></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0</strong> 5</td>
+<td>3</td>
+<td>36</td>
+<td>327</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 49</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>1</strong> 0</td>
+<td>3</td>
+<td>52</td>
+<td>498</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>0 ... 0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>2</strong> 5</td>
+<td>3</td>
+<td>39</td>
+<td>702</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 30</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>3</strong> 6</td>
+<td>3</td>
+<td>31</td>
+<td>489</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0 ... 24</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong> 5</td>
+<td>3</td>
+<td>56</td>
+<td>925</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>0 ... 70</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>5 rows × 74 columns</p>
+<p>In[50]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th><blockquote>
+<p>Out[50]:</p>
+</blockquote></th>
+<th><blockquote>
+<p>0</p>
+</blockquote></th>
+<th>208500.0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><blockquote>
+<p>1</p>
+</blockquote></td>
+<td>181500.0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><blockquote>
+<p>2</p>
+</blockquote></td>
+<td>223500.0</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><blockquote>
+<p>3</p>
+</blockquote></td>
+<td>140000.0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><blockquote>
+<p>4</p>
+</blockquote></td>
+<td>250000.0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Name: SalePrice, dtype: float64</p>
+<p>In[51]:</p>
+<p>In[52]:</p>
+<p>In[53]:</p>
+<p>In[54]:</p>
+</blockquote>
+<h1 id="linearregression"><br />
+LinearRegression</h1>
+<table>
+<thead>
+<tr class="header">
+<th><blockquote>
+<p><strong>from</strong>sklearn<strong>import</strong>linear_model</p>
+<p>lr<strong>=</strong>linear_model.LinearRegression().fit(X_train,y_train)cv<strong>=</strong>cross_val_score(lr,X_train,y_train,cv<strong>=</strong>10)</p>
+<p>y_pred<strong>=</strong>lr.predict(X_test)cv<strong>=</strong>np.mean(cv)</p>
+<p>print("Crossvalscore="<strong>+</strong>str(cv))</p>
+<p>r2,mae<strong>=</strong>model_eval(y_test,y_pred) <em># model_eval is the function in the above code block in order to calculat</em></p>
+<p>print("R^2 score = "<strong>+</strong>str(r2))print("MAEscore="<strong>+</strong>str(mae))</p>
+<p>test_accuracy_score<strong>=</strong>lr.score(X_test,y_test)</p>
+<p>print("testaccuracyscore="<strong>+</strong>str(test_accuracy_score))</p>
+</blockquote></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Cross val score = 0.8349802357507636R^2 score = 0.8126923695971509</p>
+<p>MAE score = 20721.900796082104</p>
+<p>test accuracy score = 0.8126923695971509</p>
+</blockquote>
+<h1 id="gradientbooster"><br />
+GradientBooster</h1>
+<table>
+<thead>
+<tr class="header">
+<th><blockquote>
+<p><strong>from</strong> sklearn.ensemble <strong>import</strong> GradientBoostingRegressorgbr <strong>=</strong> GradientBoostingRegressor().fit(X_train,y_train)cv<strong>=</strong>cross_val_score(gbr,X_train,y_train,cv<strong>=</strong>10)</p>
+<p>y_pred<strong>=</strong>gbr.predict(X_test)cv<strong>=</strong>np.mean(cv)</p>
+<p>print("Crossvalscore="<strong>+</strong>str(cv))</p>
+<p>r2,mae<strong>=</strong>model_eval(y_test,y_pred) <em># model_eval is the function in the above code block in order to calculat</em></p>
+<p>print("R^2 score = "<strong>+</strong>str(r2))print("MAEscore="<strong>+</strong>str(mae))</p>
+<p>test_accuracy_score<strong>=</strong>gbr.score(X_test,y_test)</p>
+<p>print("testaccuracyscore="<strong>+</strong>str(test_accuracy_score))</p>
+</blockquote></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Cross val score = 0.8590918409453145R^2 score = 0.8614501945688788</p>
+<p>MAE score = 16613.224819008876</p>
+<p>test accuracy score = 0.8614501945688788</p>
+</blockquote>
+<h1 id="predictingtestdata">Predictingtestdata</h1>
+<blockquote>
+<p>In[60]:</p>
+<p>Out[60]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><strong>Street</strong></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><blockquote>
+<p><strong>Utilities</strong></p>
+</blockquote></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... EnclosedPorch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1460</strong></p>
+</blockquote></td>
+<td>20</td>
+<td>RH</td>
+<td>80.0</td>
+<td>11622</td>
+<td>Pave</td>
+<td>Reg</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p><strong>1461</strong></p>
+</blockquote></td>
+<td>20</td>
+<td>RL</td>
+<td>81.0</td>
+<td>14267</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Corner</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1462</strong></p>
+</blockquote></td>
+<td>60</td>
+<td>RL</td>
+<td>74.0</td>
+<td>13830</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="even">
+<td><blockquote>
+<p><strong>1463</strong></p>
+</blockquote></td>
+<td>60</td>
+<td>RL</td>
+<td>78.0</td>
+<td>9978</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>Lvl</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+<tr class="odd">
+<td><blockquote>
+<p><strong>1464</strong></p>
+</blockquote></td>
+<td>120</td>
+<td>RL</td>
+<td>43.0</td>
+<td>5005</td>
+<td>Pave</td>
+<td>IR1</td>
+<td>HLS</td>
+<td><blockquote>
+<p>AllPub</p>
+</blockquote></td>
+<td>Inside</td>
+<td>Gtl ... 0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>5 rows × 75 columns</p>
+<p>In[61]:</p>
+<p>In[62]:</p>
+<p>In[63]:</p>
+<p>Out[63]:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>MSSubClass</strong></th>
+<th><strong>MSZoning</strong></th>
+<th><strong>LotFrontage</strong></th>
+<th><strong>LotArea</strong></th>
+<th><strong>Street</strong></th>
+<th><strong>LotShape</strong></th>
+<th><strong>LandContour</strong></th>
+<th><strong>Utilities</strong></th>
+<th><strong>LotConfig</strong></th>
+<th><strong>LandSlope... OpenPorchSF</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1460</strong></td>
+<td>5</td>
+<td>2</td>
+<td>96</td>
+<td>187</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>1461</strong></td>
+<td>5</td>
+<td>3</td>
+<td>97</td>
+<td>374</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0 ... 134</td>
+</tr>
+<tr class="odd">
+<td><strong>1462</strong></td>
+<td>10</td>
+<td>3</td>
+<td>90</td>
+<td>357</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 131</td>
+</tr>
+<tr class="even">
+<td><strong>1463</strong></td>
+<td>10</td>
+<td>3</td>
+<td>94</td>
+<td>1103</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 134</td>
+</tr>
+<tr class="odd">
+<td><strong>1464</strong></td>
+<td>0</td>
+<td>3</td>
+<td>58</td>
+<td>631</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 187</td>
+</tr>
+<tr class="even">
+<td><strong>...</strong></td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>... ... ...</td>
+</tr>
+<tr class="odd">
+<td><strong>2914</strong></td>
+<td>2</td>
+<td>4</td>
+<td>39</td>
+<td>491</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>2915</strong></td>
+<td>2</td>
+<td>4</td>
+<td>39</td>
+<td>488</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 103</td>
+</tr>
+<tr class="odd">
+<td><strong>2916</strong></td>
+<td>5</td>
+<td>3</td>
+<td>36</td>
+<td>500</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 0</td>
+</tr>
+<tr class="even">
+<td><strong>2917</strong></td>
+<td>14</td>
+<td>3</td>
+<td>77</td>
+<td>57</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0 ... 128</td>
+</tr>
+<tr class="odd">
+<td><strong>2918</strong></td>
+<td>10</td>
+<td>3</td>
+<td>90</td>
+<td>1052</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>1 ... 151</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>1459 rows × 74 columns</p>
+</blockquote>
+</body>
+</html>
